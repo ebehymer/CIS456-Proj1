@@ -38,7 +38,15 @@ public class PartyBase : MonoBehaviour
         foreach (CharacterBase member in partyMembers)
         {
             member.SetCharacterHealth(member.GetCharacterHealth() - damage);
-            //Decide how to handle death
+
+            if (member.GetCharacterHealth() <= 0)
+            {
+                Debug.Log(/*member.GetCharacterHealth()*/ " Dead");
+            }
+            else
+            {
+                Debug.Log(/*member.GetCharacterHealth()*/ " not Dead");
+            }
         }
     }
 

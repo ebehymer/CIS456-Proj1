@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class TileSelect : MonoBehaviour
 {
-    public enum Tile { Enemy, Magic, Trap };
-
-    public Tile type;
+    public TileBase.tileType type;
 
     TilePlacementTest man;
 
@@ -19,14 +17,14 @@ public class TileSelect : MonoBehaviour
     {
         switch (type)
         {
-            case Tile.Enemy:
+            case TileBase.tileType.enemy:
 
                 man.placing = man.enemy;
                 break;
-            case Tile.Magic:
+            case TileBase.tileType.magic:
                 man.placing = man.magic;
                 break;
-            case Tile.Trap:
+            case TileBase.tileType.trap:
                 man.placing = man.traps;
                 break;
         }

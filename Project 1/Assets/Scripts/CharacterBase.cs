@@ -8,15 +8,11 @@ public class CharacterBase : MonoBehaviour
 
     protected characterType type;
     protected int characterHealth;
-
-
-
-
-
+    public bool isAlive;
 
     void Awake()
     {
-
+        isAlive = true;
     }
 
     // Start is called before the first frame update

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PartyBase : MonoBehaviour
 {
     private CharacterBase[] partyMembers;
+    private TileBase tiles;
     //For DealDamage
     //Reference to TileBase
     //currentTile varriable
@@ -14,6 +15,7 @@ public class PartyBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tiles = GetComponent<TileBase>();
 
     }
 
@@ -33,7 +35,7 @@ public class PartyBase : MonoBehaviour
     private void DealDamage()
     {
         //Get the current tile and its damage
-        int damage = 0; //temporary till we get actual damage
+        int damage = tiles.GetTileDamage(); 
 
         foreach (CharacterBase member in partyMembers)
         {
@@ -41,11 +43,11 @@ public class PartyBase : MonoBehaviour
 
             if (member.GetCharacterHealth() <= 0)
             {
-                Debug.Log(/*member.GetCharacterHealth()*/ " Dead");
+                Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
             }
             else
             {
-                Debug.Log(/*member.GetCharacterHealth()*/ " not Dead");
+                Debug.Log(member.GetCharacterType() + " not Dead");//temp holders untill we implement death
             }
         }
     }

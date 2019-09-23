@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+//Emma has worked on this
 public class FollowPath : MonoBehaviour
 {
     public Tilemap path, walked;
@@ -27,5 +28,14 @@ public class FollowPath : MonoBehaviour
             walked.SetTile(pos, floor);
         }
         
+    }
+
+    private void Movement()
+    {
+        /*while (current != finish)
+        {
+       
+
+        }*/
     }
 }

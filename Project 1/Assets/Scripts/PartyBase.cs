@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Emma has worked on this
+
 public class PartyBase : MonoBehaviour
 {
     private CharacterBase[] partyMembers;
@@ -28,6 +30,7 @@ public class PartyBase : MonoBehaviour
     //Party moves through the dungeon
     private void Charge()
     {
+        //call FollowPath
 
     }
 

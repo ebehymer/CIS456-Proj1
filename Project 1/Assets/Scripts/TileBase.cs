@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿//Script: TileBase
+//Assignment: Project
+//Description: Handles the creation of tiles
+//Edits made by: Nicole
+//Last edited by and date: Nicole 9/23
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

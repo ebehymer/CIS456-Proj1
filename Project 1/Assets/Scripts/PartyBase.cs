@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿//Script: PartyBase
+//Assignment: Project
+//Description: Handles the party of characters and their generation
+//Edits made by: Nicole
+//Last edited by and date: Nicole 9/23
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

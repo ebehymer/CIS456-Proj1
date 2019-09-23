@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿//Script: PlayerScore
+//Assignment: Project
+//Description: Calculates the score at the end of the level using the budget/spent and party members
+//Edits made by: Nicole
+//Last edited by and date: Nicole 9/23
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

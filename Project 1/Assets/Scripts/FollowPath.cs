@@ -15,9 +15,6 @@ public class FollowPath : MonoBehaviour
     void Start()
     {
         grid = FindObjectOfType<Grid>();
-        pos = grid.WorldToCell(GameObject.Find("Start").transform.position);
-        end = grid.WorldToCell(GameObject.Find("End").transform.position);
-        StartCoroutine(Walk());
     }
 
     private void FixedUpdate()
@@ -31,10 +28,18 @@ public class FollowPath : MonoBehaviour
         
     }
 
+    public void Begin()
+    {
+        StartCoroutine(Walk());
+    }
+
 
 
     private IEnumerator Walk()
     {
+
+        pos = grid.WorldToCell(GameObject.Find("Start").transform.position);
+        end = grid.WorldToCell(GameObject.Find("End").transform.position);
 
         transform.position = grid.GetCellCenterLocal(pos);
 

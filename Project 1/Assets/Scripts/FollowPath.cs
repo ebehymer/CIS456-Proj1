@@ -17,7 +17,6 @@ public class FollowPath : MonoBehaviour
         grid = FindObjectOfType<Grid>();
         pos = grid.WorldToCell(GameObject.Find("Start").transform.position);
         end = grid.WorldToCell(GameObject.Find("End").transform.position);
-        transform.position = grid.GetCellCenterLocal(pos);
         StartCoroutine(Walk());
     }
 
@@ -36,15 +35,46 @@ public class FollowPath : MonoBehaviour
 
     private IEnumerator Walk()
     {
-        Vector3Int nextPos;
+
+        transform.position = grid.GetCellCenterLocal(pos);
+
+        path.SetTile(pos, null);
+        walked.SetTile(pos, floor);
+
+        Vector3Int xPos, xNeg, yPos, yNeg;
         while(pos != end)
         {
-            nextPos = new Vector3Int(pos.x - 1, pos.y, pos.z);
-            if (path.HasTile(nextPos))
+            xNeg = new Vector3Int(pos.x - 1, pos.y, pos.z);
+            xPos = new Vector3Int(pos.x + 1, pos.y, pos.z);
+            yPos = new Vector3Int(pos.x, pos.y + 1, pos.z);
+            yNeg = new Vector3Int(pos.x, pos.y - 1, pos.z);
+            if (path.HasTile(xNeg))
             {
-                pos = nextPos;
+                pos = xNeg;
                 //transform.position = grid.GetCellCenterLocal(pos);
                 transform.position = Vector3.Lerp(transform.position, grid.GetCellCenterLocal(pos), 1);
+            }
+            else if (path.HasTile(xPos))
+            {
+                pos = xPos;
+                //transform.position = grid.GetCellCenterLocal(pos);
+                transform.position = Vector3.Lerp(transform.position, grid.GetCellCenterLocal(pos), 1);
+            }
+            else if (path.HasTile(yPos))
+            {
+                pos = yPos;
+                //transform.position = grid.GetCellCenterLocal(pos);
+                transform.position = Vector3.Lerp(transform.position, grid.GetCellCenterLocal(pos), 1);
+            }
+            else if (path.HasTile(yNeg))
+            {
+                pos = yNeg;
+                //transform.position = grid.GetCellCenterLocal(pos);
+                transform.position = Vector3.Lerp(transform.position, grid.GetCellCenterLocal(pos), 1);
+            }
+            else
+            {
+
             }
 
             yield return new WaitForSeconds(.5f);

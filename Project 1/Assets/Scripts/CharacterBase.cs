@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿//Script: CharacterBase
+//Assignment: Project
+//Description: Used in the creation and management of the characters in the party
+//Edits made by: Nicole
+//Last edited by and date: Nicole 9/23
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,15 +14,11 @@ public class CharacterBase : MonoBehaviour
 
     protected characterType type;
     protected int characterHealth;
-
-
-
-
-
+    public bool isAlive;
 
     void Awake()
     {
-
+        isAlive = true;
     }
 
     // Start is called before the first frame update

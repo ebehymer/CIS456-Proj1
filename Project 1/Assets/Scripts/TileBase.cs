@@ -15,6 +15,7 @@ public class TileBase : MonoBehaviour
     [SerializeField] protected tileType type;
     [SerializeField] protected int tileCost;
     [SerializeField] protected int tileDamage;
+    [SerializeField] protected bool steppedOn;
 
     protected string tileName;
 

@@ -1,22 +1,23 @@
-﻿using System.Collections;
+﻿//Script: PartyBase
+//Assignment: Project
+//Description: Handles the party of characters and their generation
+//Edits made by: Nicole, Emma
+//Last edited by and date: Nicole 9/23
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PartyBase : MonoBehaviour
 {
     private CharacterBase[] partyMembers = null;
-    //For DealDamage
-    //Reference to TileBase
-    //currentTile varriable
-
-        //reference to tileplacement
-        //party is own tile
-        //if path has a tile, get the tile
-        //do the thing
+    private TileBase tiles;
 
     // Start is called before the first frame update
     void Start()
     {
+        tiles = GetComponent<TileBase>();
+
         
     }
 
@@ -28,6 +29,9 @@ public class PartyBase : MonoBehaviour
 
     public CharacterBase[] GetPartyMembers()
     {
+
+        //call FollowPath
+        
         return partyMembers;
     }
 
@@ -35,10 +39,20 @@ public class PartyBase : MonoBehaviour
     private void DealDamage()
     {
         //Get the current tile and its damage
-        int damage = 0; //temporary till we get actual damage
+        int damage = tiles.GetTileDamage(); 
 
         foreach (CharacterBase member in partyMembers)
         {
+            member.SetCharacterHealth(member.GetCharacterHealth() - damage);
+
+            if (member.GetCharacterHealth() <= 0)
+            {
+                Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
+            }
+            else
+            {
+                Debug.Log(member.GetCharacterType() + " not Dead");//temp holders untill we implement death
+            }
             member.GetComponent<CharacterBase>().SetCharacterHealth(member.GetComponent<CharacterBase>().GetCharacterHealth() - damage);
             //Decide how to handle death
         }

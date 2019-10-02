@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿//Script: FollowPath
+//Assignment: Project
+//Description: Guides the Party along the path of the dungeon
+//Edits made by: Robyn
+//Last edited by and date: Robyn 10/1
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -20,7 +26,6 @@ public class FollowPath : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(pos);
         if (path.GetTile(pos))
         {
             path.SetTile(pos, null);

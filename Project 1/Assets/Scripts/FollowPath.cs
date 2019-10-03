@@ -12,10 +12,12 @@ using UnityEngine.Tilemaps;
 //Emma has worked on this
 public class FollowPath : MonoBehaviour
 {
-    public Tilemap path, walked;
+    public Tilemap path, walked, danger;
     Vector3Int pos;
     public Tile floor;
     public Grid grid;
+
+    bool stepped = false;
 
     Vector3Int end;
     // Start is called before the first frame update
@@ -31,20 +33,56 @@ public class FollowPath : MonoBehaviour
             path.SetTile(pos, null);
             walked.SetTile(pos, floor);
         }
+
+        if (danger.GetTile(pos) && !stepped)
+        {
+
+            danger.SetTile(pos, null);
+
+            stepped = true;
+            for (int i = 0; i < TilePlacementTest.list.Count; i++)
+            {
+                
+                if (!danger.GetTile(TilePlacementTest.list[i].position))
+                {
+
+
+                    if (TilePlacementTest.list[i].tile.GetTileType() == TileBase.tileType.trap)
+                    {
+                        GetComponent<PartyBase>().DealDamage(TilePlacementTest.traptile.GetTileDamage());
+                    }
+                    else if (TilePlacementTest.list[i].tile.GetTileType() == TileBase.tileType.magic)
+                    {
+                        GetComponent<PartyBase>().DealDamage(TilePlacementTest.magictile.GetTileDamage());
+                    }
+                    else GetComponent<PartyBase>().DealDamage(TilePlacementTest.enemytile.GetTileDamage());
+
+
+
+                    TilePlacementTest.list.RemoveAt(i);
+                }
+            }
+        }
+
+        if (GetComponent<PartyBase>().allDead)
+        {
+            StopCoroutine(Walk());
+        }
         
     }
 
 
     public void Begin()
     {
+        if(!walking)
         StartCoroutine(Walk());
     }
 
-
+    bool walking;
 
     private IEnumerator Walk()
     {
-
+        walking = true;
         pos = grid.WorldToCell(GameObject.Find("Start").transform.position);
         end = grid.WorldToCell(GameObject.Find("End").transform.position);
 
@@ -54,7 +92,7 @@ public class FollowPath : MonoBehaviour
         walked.SetTile(pos, floor);
 
         Vector3Int xPos, xNeg, yPos, yNeg;
-        while(pos != end)
+        while(pos != end && !GetComponent<PartyBase>().allDead)
         {
             xNeg = new Vector3Int(pos.x - 1, pos.y, pos.z);
             xPos = new Vector3Int(pos.x + 1, pos.y, pos.z);
@@ -88,8 +126,9 @@ public class FollowPath : MonoBehaviour
             {
 
             }
-
+            stepped = false;
             yield return new WaitForSeconds(.5f);
+
         }
 
 

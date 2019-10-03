@@ -71,11 +71,11 @@ public class TilePlacementTest : MonoBehaviour
 
     BudgetManager man;
 
-    TrapTile traptile = new TrapTile();
-    MagicTile magictile = new MagicTile();
-    EnemyTile enemytile = new EnemyTile();
+    public static TrapTile traptile = new TrapTile();
+    public static MagicTile magictile = new MagicTile();
+    public static EnemyTile enemytile = new EnemyTile();
 
-    public List<Action> list = new List<Action>();
+    public static List<Action> list = new List<Action>();
     public int numActions;
     Vector3Int oldCoord;
 
@@ -181,8 +181,7 @@ public class TilePlacementTest : MonoBehaviour
             Misc.SetTile(oldCoord, null);
             oldCoord = coordinate;
         }
-
-        Debug.Log(list.Count);
+        
     }
 
 

@@ -151,19 +151,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wall: {fileID: 1162653295}
   Path: {fileID: 778774800}
-  Trap: {fileID: 1574172918}
+  obstacle: {fileID: 1574172918}
   Misc: {fileID: 43397918}
   placing: {fileID: 11400000, guid: aa2d99b78949be345a12338010c77c3d, type: 2}
-  traps: {fileID: 11400000, guid: 1fbcb5df5738e5d49aeddd30e23ec9a7, type: 2}
+  trap: {fileID: 11400000, guid: 1fbcb5df5738e5d49aeddd30e23ec9a7, type: 2}
   magic: {fileID: 11400000, guid: 45a8ce2c60538704c8555a411ab0b0c5, type: 2}
   enemy: {fileID: 11400000, guid: aa2d99b78949be345a12338010c77c3d, type: 2}
-  glow: {fileID: 11400000, guid: 27a7545dce7439c44b9829395e179dc3, type: 2}
+  placeGlow: {fileID: 11400000, guid: 27a7545dce7439c44b9829395e179dc3, type: 2}
+  deleteGlow: {fileID: 11400000, guid: 2251d044e4eadf4489ad55f2ea1a1e23, type: 2}
   grid: {fileID: 133878841}
-  trapC: {r: 0.04705883, g: 0.03137255, b: 0.9921569, a: 0}
-  magicC: {r: 0.75294125, g: 0.7176471, b: 0.2901961, a: 0}
-  enemyC: {r: 0, g: 1, b: 0.121568635, a: 0}
   deleting: 0
   lastDeleted: 0
+  info: {fileID: 1700263491}
   numActions: 0
 --- !u!4 &23828548
 Transform:
@@ -1272,9 +1271,9 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 0, g: 0, b: 0, a: 0}
+    m_Data: {r: 2.0013e-41, g: 2.0013e-41, b: 2.0013e-41, a: 2.0013e-41}
   - m_RefCount: 49
-    m_Data: {r: 0.9433962, g: 0, b: 0, a: 1}
+    m_Data: {r: 0, g: 0, b: 0, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -13, y: -9, z: 0}
@@ -4200,6 +4199,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1305769510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305769512}
+  - component: {fileID: 1305769511}
+  m_Layer: 0
+  m_Name: Budget Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1305769511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305769510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436af9cc148784e4285e6564d67ddc4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  total: {fileID: 904766258}
+  used: {fileID: 559046390}
+  maxMoney: 2000
+  usedMoney: 0
+--- !u!4 &1305769512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305769510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.58, y: 2.2113447, z: -4.5598516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1329869702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4578,6 +4624,7 @@ GameObject:
   - component: {fileID: 1559175268}
   - component: {fileID: 1559175267}
   - component: {fileID: 1559175266}
+  - component: {fileID: 1559175269}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4599,7 +4646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 778774800}
   walked: {fileID: 2109647498}
-  floor: {fileID: 11400000, guid: 07cdbc20c1b559a4c811510d73b63a87, type: 2}
+  floor: {fileID: 11400000, guid: 8dea9e207b1d4c343b6aec4fd69d184f, type: 2}
   grid: {fileID: 0}
 --- !u!212 &1559175267
 SpriteRenderer:
@@ -4664,6 +4711,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1559175269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559175265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69df21c54ccae74dbc682beedc71ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1574172915
 GameObject:
   m_ObjectHideFlags: 0

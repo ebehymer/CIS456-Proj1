@@ -13,12 +13,12 @@ using UnityEngine.UI;
 public class Action
 {
    public Vector3Int position;
-    public Tile type;
+    public TileBase tile;
 
-    public Action(Vector3Int pos, Tile tile)
+    public Action(Vector3Int pos, TileBase t)
     {
         position = pos;
-        type = tile;
+        tile = t;
         
     }
     public Action(Vector3Int pos)
@@ -27,12 +27,41 @@ public class Action
     }
 }
 
+public class TrapTile : TileBase
+{
+    public TrapTile()
+    {
+        SetTileCost(50);
+        SetTileType(tileType.trap);
+        SetTileDamage(5);
+    }
+}
+
+public class MagicTile : TileBase
+{
+    public MagicTile()
+    {
+        SetTileCost(150);
+        SetTileType(tileType.magic);
+        SetTileDamage(15);
+    }
+}
+
+public class EnemyTile : TileBase
+{
+    public EnemyTile()
+    {
+        SetTileCost(100);
+        SetTileType(tileType.enemy);
+        SetTileDamage(10);
+    }
+}
 
 public class TilePlacementTest : MonoBehaviour
 {
 
-    public Tilemap Wall, Path, Trap, Misc;
-    public Tile placing, traps, magic, enemy, glow;
+    public Tilemap Wall, Path, obstacle, Misc;
+    public Tile placing, trap, magic, enemy, placeGlow, deleteGlow;
     public Grid grid;
 
     public bool deleting;
@@ -41,6 +70,10 @@ public class TilePlacementTest : MonoBehaviour
     public Text info;
 
     BudgetManager man;
+
+    TrapTile traptile = new TrapTile();
+    MagicTile magictile = new MagicTile();
+    EnemyTile enemytile = new EnemyTile();
 
     public List<Action> list = new List<Action>();
     public int numActions;
@@ -53,7 +86,20 @@ public class TilePlacementTest : MonoBehaviour
 
     private void Update()
     {
-        info.text = "Tile Info:\n" + placing.name;
+        if(placing == trap)
+        {
+            info.text = "Tile Info:\n" + "Trap\nCost: " + traptile.GetTileCost() + "\nDamage: " + traptile.GetTileDamage();
+        }
+        else if (placing == magic)
+        {
+            info.text = "Tile Info:\n" + "Magic\nCost: " + magictile.GetTileCost() + "\nDamage: " + magictile.GetTileDamage();
+        }
+        else if (placing == enemy)
+        {
+            info.text = "Tile Info:\n" + "Enemy\nCost: " + enemytile.GetTileCost() + "\nDamage: " + enemytile.GetTileDamage();
+        }
+
+
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int coordinate = grid.WorldToCell(pos);
 
@@ -61,53 +107,58 @@ public class TilePlacementTest : MonoBehaviour
         {
             if (!deleting)
             {
-                if (Path.GetTile(coordinate) && !Trap.GetTile(coordinate))
+                if (Path.GetTile(coordinate) && !obstacle.GetTile(coordinate))
                 {
 
-                    Trap.SetTile(coordinate, placing);
-                    list.Add(new Action(coordinate, placing));
+                    obstacle.SetTile(coordinate, placing);
 
                     numActions++;
 
                     if (lastDeleted) lastDeleted = false;
 
-                    if (placing == traps)
+                    if (placing == trap)
                     {
-                        man.usedMoney += 50;
+                        list.Add(new Action(coordinate, new TrapTile()));
+                        man.usedMoney += list[numActions-1].tile.GetTileCost();
                     }
                     else if (placing == magic)
                     {
-                        man.usedMoney += 150;
-                    }
-                    else man.usedMoney += 100;
 
+                        list.Add(new Action(coordinate, new MagicTile()));
+                        man.usedMoney += list[numActions-1].tile.GetTileCost();
+                    }
+                    else
+                    {
+                        list.Add(new Action(coordinate, new EnemyTile()));
+                        man.usedMoney += list[numActions-1].tile.GetTileCost();
+                    }
                     undone.Clear();
                 }
             }
             else
             {
-                if (Trap.GetTile(coordinate))
+                if (obstacle.GetTile(coordinate))
                 {
-                    Trap.SetTile(coordinate, null);
+                    obstacle.SetTile(coordinate, null);
                     numActions--;
                     lastDeleted = true;
 
 
                     for (int i = 0; i < list.Count; i++)
                     {
-                        if (!Trap.GetTile(list[i].position))
+                        if (!obstacle.GetTile(list[i].position))
                         {
 
 
-                            if (list[i].type == traps)
+                            if (list[i].tile.GetTileType() == TileBase.tileType.trap)
                             {
-                                man.usedMoney -= 50;
+                                man.usedMoney -= list[i].tile.GetTileCost();
                             }
-                            else if (list[i].type == magic)
+                            else if (list[i].tile.GetTileType() == TileBase.tileType.magic)
                             {
-                                man.usedMoney -= 150;
+                                man.usedMoney -= list[i].tile.GetTileCost();
                             }
-                            else man.usedMoney -= 100;
+                            else man.usedMoney -= list[i].tile.GetTileCost();
 
                             undone.Push(list[i]);
                             list.RemoveAt(i);
@@ -119,7 +170,11 @@ public class TilePlacementTest : MonoBehaviour
 
         if (Wall.GetTile(coordinate))
         {
-            Misc.SetTile(coordinate, glow);
+            if (deleting)
+            {
+                Misc.SetTile(coordinate, deleteGlow);
+            }
+            else Misc.SetTile(coordinate, placeGlow);
         }
         if(oldCoord != coordinate)
         {
@@ -142,38 +197,48 @@ public class TilePlacementTest : MonoBehaviour
             Action redone = undone.Pop();
             list.Add(redone);
 
-            Trap.SetTile(redone.position, redone.type);
 
             numDeleted++;
             numActions++;
 
-            if (redone.type == traps)
+            if (redone.tile.GetTileType() == TileBase.tileType.trap)
             {
-                man.usedMoney += 50;
+                man.usedMoney += redone.tile.GetTileCost();
+
+                obstacle.SetTile(redone.position, trap);
             }
-            else if (redone.type == magic)
+            else if (redone.tile.GetTileType() == TileBase.tileType.magic)
             {
-                man.usedMoney += 150;
+                man.usedMoney += redone.tile.GetTileCost();
+
+                obstacle.SetTile(redone.position, magic);
             }
-            else man.usedMoney += 100;
+            else
+            {
+                man.usedMoney += redone.tile.GetTileCost();
+
+                obstacle.SetTile(redone.position, enemy);
+            }
         }
         else if (numActions > 0)
         {
-            undone.Push(list[numActions-1]);
-            Trap.SetTile(list[numActions-1].position, null);
+            undone.Push(list[numActions - 1]);
+            obstacle.SetTile(list[numActions - 1].position, null);
 
-            if (list[numActions-1].type == traps)
+            if (list[numActions - 1].tile.GetTileType() == TileBase.tileType.trap)
             {
-                man.usedMoney -= 50;
+                man.usedMoney -= list[numActions-1].tile.GetTileCost();
             }
-            else if (list[numActions - 1].type == magic)
+            else if (list[numActions - 1].tile.GetTileType() == TileBase.tileType.magic)
             {
-                man.usedMoney -= 150;
+                man.usedMoney -= list[numActions - 1].tile.GetTileCost();
             }
-            else man.usedMoney -= 100;
+            else
+            {
+                man.usedMoney -= list[numActions - 1].tile.GetTileCost();
+            }
 
-
-            list.RemoveAt(numActions-1);
+            list.RemoveAt(numActions - 1);
             numActions--;
         }
     }
@@ -185,18 +250,18 @@ public class TilePlacementTest : MonoBehaviour
             if (numDeleted > 0)
             {
                 undone.Push(list[numActions - 1]);
-                Trap.SetTile(list[numActions - 1].position, null);
+                obstacle.SetTile(list[numActions - 1].position, null);
 
 
-                if (list[numActions - 1].type == traps)
+                if (list[numActions - 1].tile.GetTileType() == TileBase.tileType.trap)
                 {
-                    man.usedMoney -= 50;
+                    man.usedMoney -= list[numActions - 1].tile.GetTileCost();
                 }
-                else if (list[numActions - 1].type == magic)
+                else if (list[numActions - 1].tile.GetTileType() == TileBase.tileType.magic)
                 {
-                    man.usedMoney -= 150;
+                    man.usedMoney -= list[numActions - 1].tile.GetTileCost();
                 }
-                else man.usedMoney -= 100;
+                else man.usedMoney -= list[numActions - 1].tile.GetTileCost();
 
                 list.RemoveAt(numActions - 1);
                 numActions--;
@@ -208,18 +273,24 @@ public class TilePlacementTest : MonoBehaviour
             Action redone = undone.Pop();
             list.Add(redone);
 
-            Trap.SetTile(redone.position, redone.type);
-
-
-            if (redone.type == traps)
+            if (redone.tile.GetTileType() == TileBase.tileType.trap)
             {
-                man.usedMoney += 50;
+                man.usedMoney += redone.tile.GetTileCost();
+
+                obstacle.SetTile(redone.position, trap);
             }
-            else if (redone.type == magic)
+            else if (redone.tile.GetTileType() == TileBase.tileType.magic)
             {
-                man.usedMoney += 150;
+                man.usedMoney += redone.tile.GetTileCost();
+
+                obstacle.SetTile(redone.position, magic);
             }
-            else man.usedMoney += 100;
+            else
+            {
+                man.usedMoney += redone.tile.GetTileCost();
+
+                obstacle.SetTile(redone.position, enemy);
+            }
 
             numActions++;
         }

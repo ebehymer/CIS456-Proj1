@@ -25,7 +25,7 @@ public class TileSelect : MonoBehaviour
                 man.placing = man.magic;
                 break;
             case TileBase.tileType.trap:
-                man.placing = man.traps;
+                man.placing = man.trap;
                 break;
         }
     }

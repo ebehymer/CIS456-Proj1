@@ -90,7 +90,7 @@ public class PartyBase : MonoBehaviour
         //Adds a prefab to the list for each character type
         for(int index = 0; index < partyMembers.Length; index++)
         {
-            int rng = Random.Range(1, 3);
+            int rng = Random.Range(1, 4);
             if(rng == 1) // Add a rogue
             {
                 partyMembers[index] = new CharacterBase();

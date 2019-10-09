@@ -2,7 +2,7 @@
 //Assignment: Project
 //Description: Handles the party of characters and their generation
 //Edits made by: Nicole, Emma, Robyn
-//Last edited by and date: Robyn 10/3
+//Last edited by and date: Robyn 10/9
 
 using System.Collections;
 using System.Collections.Generic;
@@ -84,6 +84,27 @@ public class PartyBase : MonoBehaviour
         Debug.Log(allDead);
     }
 
+    public void updateText()
+    {
+
+        text.text = "Party Contains\n";
+
+        foreach (CharacterBase member in partyMembers)
+        {
+            if (member.GetCharacterHealth() < 0)
+            {
+                Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
+
+                text.text += member.GetCharacterType() + ": Dead\n";
+            }
+            else
+            {
+                Debug.Log(member.GetCharacterType() + " not Dead");//temp holders untill we implement death
+
+                text.text += member.GetCharacterType() + ": " + member.GetCharacterHealth() + "\n";
+            }
+        }
+    }
     //Generates 1 of each character type in the party
     private void GenerateParty()
     {
@@ -111,6 +132,7 @@ public class PartyBase : MonoBehaviour
             }
 
 
+            partyMembers[index].maxHealth = partyMembers[index].GetCharacterHealth();
         }
 
 

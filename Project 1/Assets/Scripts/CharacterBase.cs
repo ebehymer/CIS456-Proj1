@@ -1,8 +1,8 @@
 ﻿//Script: CharacterBase
 //Assignment: Project
 //Description: Used in the creation and management of the characters in the party
-//Edits made by: Nicole
-//Last edited by and date: Nicole 9/23
+//Edits made by: Nicole, Robyn
+//Last edited by and date: Robyn 10/9
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ public class CharacterBase : MonoBehaviour
 
     protected characterType type;
     protected int characterHealth;
+    public int maxHealth;
     public bool isAlive;
 
     void Awake()

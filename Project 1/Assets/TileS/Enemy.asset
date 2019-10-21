@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 88ae5c71ad1018d48ae559760673930d, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.122489214, a: 1}
+  m_Color: {r: 0.9339623, g: 0.35500383, b: 0.2687344, a: 1}
   m_Transform:
     e00: 1
     e01: 0

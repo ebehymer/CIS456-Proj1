@@ -29,6 +29,9 @@ public class FollowPath : MonoBehaviour
     TilePlacementTest man;
 
     Vector3Int end;
+
+    float stepTime = .1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -150,7 +153,7 @@ public class FollowPath : MonoBehaviour
             stepped = false;
 
             posList.Add(pos);
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(stepTime);
 
         }
         Debug.Log("Reached End");

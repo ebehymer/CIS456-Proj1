@@ -100,6 +100,8 @@ public class FollowPath : MonoBehaviour
         pos = grid.WorldToCell(GameObject.Find("Start").transform.position);
         path.SetTile(end, floor);
 
+        stepTime = .5f;
+
         temp = TilePlacementTest.list;
 
         GameManager.current = GameManager.GameState.running;
@@ -205,6 +207,23 @@ public class FollowPath : MonoBehaviour
             }
             else danger.SetTile(TilePlacementTest.list[i].position, man.enemy);
 
+        }
+    }
+
+    public void timeChange(Text t)
+    {
+        if(t.text == "Slow")
+        {
+            stepTime = .5f;
+            t.text = "Medium";
+        } else if (t.text == "Medium")
+        {
+            stepTime = .1f;
+            t.text = "Fast";
+        } else if (t.text == "Fast")
+        {
+            stepTime = .9f;
+            t.text = "Slow";
         }
     }
 }

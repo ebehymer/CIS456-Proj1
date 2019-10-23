@@ -169,7 +169,7 @@ public class TilePlacementTest : MonoBehaviour
                 }
             }
         }
-        if (Wall.GetTile(coordinate))
+        if (Path.GetTile(coordinate))
         {
             if (deleting)
             {

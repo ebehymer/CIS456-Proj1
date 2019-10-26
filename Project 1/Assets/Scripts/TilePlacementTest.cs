@@ -79,6 +79,8 @@ public class TilePlacementTest : MonoBehaviour
     public int numActions;
     Vector3Int oldCoord;
 
+    public AudioSource magicSound, trapSound, enemySound;
+
     private void Start()
     {
         man = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
@@ -120,17 +122,20 @@ public class TilePlacementTest : MonoBehaviour
                     {
                         list.Add(new Action(coordinate, new TrapTile()));
                         man.usedMoney += list[numActions-1].tile.GetTileCost();
+                        trapSound.Play();
                     }
                     else if (placing == magic)
                     {
 
                         list.Add(new Action(coordinate, new MagicTile()));
                         man.usedMoney += list[numActions-1].tile.GetTileCost();
+                        magicSound.Play();
                     }
                     else
                     {
                         list.Add(new Action(coordinate, new EnemyTile()));
                         man.usedMoney += list[numActions-1].tile.GetTileCost();
+                        enemySound.Play();
                     }
                     undone.Clear();
                 }

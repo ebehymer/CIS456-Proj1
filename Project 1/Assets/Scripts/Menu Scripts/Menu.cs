@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class Menu : MonoBehaviour
 {
 
-    private int currentScene;
+    public UnityEvent menuDidAppear = new UnityEvent();
+
+    public UnityEvent menuWillDisappear = new UnityEvent();
+
+
+
+    /*
+     * 
+     * private int currentScene;
     private GameObject pauseMenu;
 
     private void Awake()
@@ -39,4 +47,6 @@ public class Menu : MonoBehaviour
     {
         Application.Quit();
     }
+     * 
+     */
 }

@@ -421,15 +421,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 505111859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15eda0c3446d0ce4f83ed51323459ef5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a8f44ebd404b9f469aed000320a3c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileRoad: {fileID: 8607608309198792473, guid: 50b720b5edba8ae44bc59a1848f7bda9,
-    type: 3}
-  wallTile: {fileID: 5375712363849781150, guid: 5165ecc6b4949be419ef17e294a39770,
-    type: 3}
-  endTile: {fileID: 0}
-  showDebug: 0
+  numWayPoints: 12
+  start: {fileID: 1337796362593474234, guid: b1799f021eaeb134187b412ef7fbe981, type: 3}
+  floor: {fileID: 8607608309198792473, guid: 50b720b5edba8ae44bc59a1848f7bda9, type: 3}
+  wall: {fileID: 5375712363849781150, guid: 5165ecc6b4949be419ef17e294a39770, type: 3}
+  end: {fileID: 1337796362593474234, guid: 37849f6f689d42249830678670ef9218, type: 3}
+  holder: {fileID: 505111859}
 --- !u!4 &505111861
 Transform:
   m_ObjectHideFlags: 0

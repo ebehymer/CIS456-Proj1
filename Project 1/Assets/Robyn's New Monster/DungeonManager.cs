@@ -11,7 +11,9 @@ public class DungeonManager : MonoBehaviour
 
     public GameObject tileRoad;
     public GameObject wallTile;
-    public GameObject endTile;
+    public GameObject endTile, startTile;
+
+    public Vector2 startPos, endPos;
 
     private MazeGeneratorHelper dataGenerator;
 
@@ -48,6 +50,8 @@ public class DungeonManager : MonoBehaviour
                 {
                     GameObject ins = Instantiate(tileRoad);
                     ins.transform.position = new Vector2(j, i);
+
+                    floors.Add(new Vector2(j, i));
                 } else
                 {
                     GameObject ins = Instantiate(wallTile);
@@ -55,6 +59,108 @@ public class DungeonManager : MonoBehaviour
                 }
             }
         }
+
+        for(int i = 3; i < 8; i++)
+        {
+            if(data[i, 1] == 0)
+            {
+                GameObject ins = Instantiate(startTile);
+                ins.transform.position = startPos = new Vector2(0, i);
+                break;
+            }
+        }
+        for(int i = 9; i > 3; i--)
+        {
+            if(data[i, 18] == 0)
+            {
+                GameObject ins = Instantiate(endTile);
+                ins.transform.position = endPos = new Vector2(19, i);
+                break;
+            }
+        }
+
+        StartCoroutine(FinalizePath(numRows, numColumns));
+    }
+
+    public int nextX;
+    public int nextY;
+    public Vector2 currentPos;
+
+    List<Vector2> floors = new List<Vector2>();
+
+    List<Vector2> finalPath = new List<Vector2>();
+    IEnumerator FinalizePath(int numRows, int numColumns)
+    {
+        finalPath.Add(startPos);
+        currentPos = new Vector2(startPos.x -1, startPos.y);
+        Vector2 nextPos = currentPos;
+
+        do
+        {
+            do
+            {
+
+                
+                int direction = Random.Range(0, 4);
+
+                switch (direction)
+                {
+
+                    case 0:
+                        nextPos.x += 1;
+                        break;
+                    case 1:
+                        nextPos.x -= 1;
+                        break;
+                    case 2:
+                        nextPos.y += 1;
+                        break;
+                    case 3:
+                        nextPos.y -= 1;
+                        break;
+
+                }
+                yield return null;
+
+
+            } while (!floors.Contains(nextPos) && !finalPath.Contains(nextPos));
+
+            if (!floors.Contains(new Vector2(nextPos.x + 1, nextPos.y)) &&
+                !floors.Contains(new Vector2(nextPos.x - 1, nextPos.y)) &&
+                !floors.Contains(new Vector2(nextPos.x, nextPos.y+1)) &&
+                !floors.Contains(new Vector2(nextPos.x, nextPos.y-1)))
+            {
+               RaycastHit2D hit = Physics2D.BoxCast(nextPos, Vector2.one, 0, Vector2.zero);
+                Destroy(hit.collider.gameObject);
+                GameObject ins = Instantiate(wallTile);
+                ins.transform.position = nextPos;
+            }
+            else { 
+            currentPos = nextPos;
+            finalPath.Add(currentPos);
+            }
+            yield return null;
+
+
+            if (Vector2.Distance(endPos, currentPos) <= 1) currentPos = endPos;
+        } while (currentPos != endPos);
+
+        finalPath.Add(endPos);
+
+        for (int i = 0; i < numRows; i++)
+        {
+            for (int j = 0; j < numColumns; j++)
+            {
+               if(!finalPath.Contains(new Vector2(j, i)))
+                {
+                    RaycastHit2D hit = Physics2D.BoxCast(new Vector2(j, i), Vector2.one, 0, Vector2.zero);
+                    Destroy(hit.collider.gameObject);
+                    GameObject ins = Instantiate(wallTile);
+                    ins.transform.position = nextPos;
+                }
+            }
+        }
+
     }
 
 

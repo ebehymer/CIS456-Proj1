@@ -16,6 +16,8 @@ public class FollowPath : MonoBehaviour
     Vector3Int pos;
     public Tile floor;
     public Grid grid;
+    
+
 
     public Text failure;
 
@@ -32,6 +34,8 @@ public class FollowPath : MonoBehaviour
 
     float stepTime = .1f;
 
+    int mapWidth = 20, mapHeight = 12;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,8 @@ public class FollowPath : MonoBehaviour
         end = grid.WorldToCell(GameObject.Find("End").transform.position);
         man = GameObject.Find("Tile Manager").GetComponent<TilePlacementTest>();
         failure.text = "";
+
+        
     }
 
     private void FixedUpdate()
@@ -171,6 +177,7 @@ public class FollowPath : MonoBehaviour
         yield return null;
     }
 
+   
     public void Restart()
     {
         GameManager.current = GameManager.GameState.placing;

@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 10126606}
   - component: {fileID: 10126607}
   m_Layer: 0
-  m_Name: Trap
+  m_Name: TrapSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 240154145}
   - component: {fileID: 240154146}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemySound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4501,7 +4501,7 @@ GameObject:
   - component: {fileID: 1251774463}
   - component: {fileID: 1251774464}
   m_Layer: 0
-  m_Name: Magic
+  m_Name: MagicSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

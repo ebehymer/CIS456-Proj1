@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] List<Menu> menus = new List<Menu>();
     public GameObject pauseMenu;
+    public GameObject mainMenu;
     private bool isInMainMenu;
     //private int buildIndex;
 
@@ -17,10 +18,12 @@ public class MenuManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Main Menu")
         {
             isInMainMenu = true;
+            mainMenu.SetActive(true);
         }
         else
         {
             isInMainMenu = false;
+            mainMenu.SetActive(false);
         }
         ShowMenu(menus[0]);
         pauseMenu.SetActive(false);
@@ -36,6 +39,13 @@ public class MenuManager : MonoBehaviour
         {
             PauseGame();
         }
+
+        if (SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            isInMainMenu = false;
+            mainMenu.SetActive(false);
+        }
+
     }
 
     public void PauseGame()
@@ -62,6 +72,7 @@ public class MenuManager : MonoBehaviour
     {
         isInMainMenu = false;
         SceneManager.LoadScene(1);
+        mainMenu.SetActive(false);
     }
 
     public void QuitGame()

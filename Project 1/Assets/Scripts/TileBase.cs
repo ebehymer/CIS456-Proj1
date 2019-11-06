@@ -1,7 +1,7 @@
 ﻿//Script: TileBase
 //Assignment: Project
 //Description: Handles the creation of tiles
-//Edits made by: Nicole
+//Edits made by: Nicole and Robyn
 //Last edited by and date: Nicole 9/23
 
 using System.Collections;

@@ -1,10 +1,4 @@
-﻿//Script: UIManager
-//Assignment: Project
-//Description: Manages the UI (Not In Use)
-//Edits made by: CJ
-//Last edited by and date: CJ 10/2/2019
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

@@ -28,5 +28,6 @@ public class TileSelect : MonoBehaviour
                 man.placing = man.trap;
                 break;
         }
+        man.deleting = false;
     }
 }

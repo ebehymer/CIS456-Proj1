@@ -156,7 +156,7 @@ public class TileManager : MonoBehaviour
             }
             else
             {
-                if (Input.GetMouseButtonDown(0) && tile)
+                if (Input.GetMouseButton(0) && tile)
                 {
                     numActions--;
                     undoneCount++;
@@ -164,6 +164,7 @@ public class TileManager : MonoBehaviour
                     placed.Remove(hit.collider.transform.position);
                     undone.Push(holder);
                     holder.GetComponent<SpriteRenderer>().enabled = false;
+                    holder.GetComponent<BoxCollider2D>().enabled = false;
                     lastDeleted = true;
                     actions.TrimExcess();
                     if(holder.name == "Trap(Clone)")
@@ -199,6 +200,7 @@ public class TileManager : MonoBehaviour
             GameObject redone = undone.Pop();
             actions.Push(redone);
             redone.GetComponent<SpriteRenderer>().enabled = true;
+            redone.GetComponent<BoxCollider2D>().enabled = true;
             numActions++;
             undoneCount--;
             numDeleted++;
@@ -247,6 +249,7 @@ public class TileManager : MonoBehaviour
                 GameObject holder = actions.Pop();
                 undone.Push(holder);
                 holder.GetComponent<SpriteRenderer>().enabled = false;
+                holder.GetComponent<BoxCollider2D>().enabled = false;
                 undoneCount++;
                 numActions--;
                 numDeleted--;

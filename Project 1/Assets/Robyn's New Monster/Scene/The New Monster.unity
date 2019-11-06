@@ -424,8 +424,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8f44ebd404b9f469aed000320a3c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numWayPoints: 16
-  wayPoints: []
+  numWayPoints: 8
+  wayPoints:
+  - {x: 0, y: 5}
+  - {x: 4, y: 5}
+  - {x: 4, y: 0}
+  - {x: 9, y: 0}
+  - {x: 9, y: 10}
+  - {x: 13, y: 10}
+  - {x: 13, y: 8}
+  - {x: 19, y: 8}
   wayPointObj: []
   makeRandom: 0
   start: {fileID: 1337796362593474234, guid: b1799f021eaeb134187b412ef7fbe981, type: 3}

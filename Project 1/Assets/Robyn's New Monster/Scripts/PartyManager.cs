@@ -37,15 +37,15 @@ public class PartyManager : MonoBehaviour
         {
             if (col.collider.gameObject.tag == "Magic")
             {
-                GetComponent<PartyBase>().DealDamage(TileManager.magictile.GetTileDamage());
+                GetComponent<PartyBase>().DealDamage(TileManager.magictile.GetTileDamage(), TileBase.tileType.magic);
             }
             if (col.collider.gameObject.tag == "Enemy")
             {
-                GetComponent<PartyBase>().DealDamage(TileManager.enemytile.GetTileDamage());
+                GetComponent<PartyBase>().DealDamage(TileManager.enemytile.GetTileDamage(), TileBase.tileType.enemy);
             }
             if (col.collider.gameObject.tag == "Trap")
             {
-                GetComponent<PartyBase>().DealDamage(TileManager.traptile.GetTileDamage());
+                GetComponent<PartyBase>().DealDamage(TileManager.traptile.GetTileDamage(), TileBase.tileType.trap);
             }
 
             col.collider.enabled = false;

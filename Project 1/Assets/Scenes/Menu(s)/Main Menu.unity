@@ -714,6 +714,7 @@ MonoBehaviour:
   - {fileID: 1261639696}
   - {fileID: 1936755847}
   pauseMenu: {fileID: 1283385385}
+  mainMenu: {fileID: 1261639695}
 --- !u!4 &606570473
 Transform:
   m_ObjectHideFlags: 0

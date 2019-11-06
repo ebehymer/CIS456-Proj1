@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] List<Menu> menus = new List<Menu>();
     public GameObject pauseMenu;
     private bool isInMainMenu;
+    //private int buildIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,8 @@ public class MenuManager : MonoBehaviour
         }
         ShowMenu(menus[0]);
         pauseMenu.SetActive(false);
+
+       // buildIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     void Update()
@@ -53,6 +56,29 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
+
+
+    public void PlayGame()
+    {
+        isInMainMenu = false;
+        SceneManager.LoadScene(1);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("You have quit the game.");
+    }
+
+    //public void ReplayLevel()
+    //{
+    //    SceneManager.LoadScene(buildIndex);
+    //}
+
+    //public void NextLevel()
+    //{
+    //    SceneManager.LoadScene(buildIndex + 1);
+    //}
 
     public void ShowMenu(Menu menuToShow)
     {
@@ -88,17 +114,4 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
-
-    public void PlayGame()
-    {
-        isInMainMenu = false;
-        SceneManager.LoadScene(1);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-        Debug.Log("You have quit the game.");
-    }
-
 }

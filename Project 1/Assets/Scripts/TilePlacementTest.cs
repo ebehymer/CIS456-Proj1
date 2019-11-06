@@ -2,7 +2,7 @@
 //Assignment: Project
 //Description: Handles the Placement of obstacles on the path
 //Edits made by: Robyn
-//Last edited by and date: Robyn 10/9
+//Last edited by and date: Robyn 10/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -79,6 +79,8 @@ public class TilePlacementTest : MonoBehaviour
     public int numActions;
     Vector3Int oldCoord;
 
+    public AudioSource magicSound, trapSound, enemySound;
+
     private void Start()
     {
         man = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
@@ -102,74 +104,76 @@ public class TilePlacementTest : MonoBehaviour
 
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int coordinate = grid.WorldToCell(pos);
-        if (GameManager.current == GameManager.GameState.placing)
+
+        if (Input.GetMouseButton(0))
         {
-            if (Input.GetMouseButton(0))
+            if (!deleting)
             {
-                if (!deleting)
+                if (Path.GetTile(coordinate) && !obstacle.GetTile(coordinate))
                 {
-                    if (Path.GetTile(coordinate) && !obstacle.GetTile(coordinate))
+
+                    obstacle.SetTile(coordinate, placing);
+
+                    numActions++;
+
+                    if (lastDeleted) lastDeleted = false;
+
+                    if (placing == trap)
                     {
-
-                        obstacle.SetTile(coordinate, placing);
-
-                        numActions++;
-
-                        if (lastDeleted) lastDeleted = false;
-
-                        if (placing == trap)
-                        {
-                            list.Add(new Action(coordinate, new TrapTile()));
-                            man.usedMoney += list[numActions - 1].tile.GetTileCost();
-                        }
-                        else if (placing == magic)
-                        {
-
-                            list.Add(new Action(coordinate, new MagicTile()));
-                            man.usedMoney += list[numActions - 1].tile.GetTileCost();
-                        }
-                        else
-                        {
-                            list.Add(new Action(coordinate, new EnemyTile()));
-                            man.usedMoney += list[numActions - 1].tile.GetTileCost();
-                        }
-                        undone.Clear();
+                        list.Add(new Action(coordinate, new TrapTile()));
+                        man.usedMoney += list[numActions-1].tile.GetTileCost();
+                        trapSound.Play();
                     }
-                }
-                else
-                {
-                    if (obstacle.GetTile(coordinate))
+                    else if (placing == magic)
                     {
-                        obstacle.SetTile(coordinate, null);
-                        numActions--;
-                        lastDeleted = true;
+
+                        list.Add(new Action(coordinate, new MagicTile()));
+                        man.usedMoney += list[numActions-1].tile.GetTileCost();
+                        magicSound.Play();
+                    }
+                    else
+                    {
+                        list.Add(new Action(coordinate, new EnemyTile()));
+                        man.usedMoney += list[numActions-1].tile.GetTileCost();
+                        enemySound.Play();
+                    }
+                    undone.Clear();
+                }
+            }
+            else
+            {
+                if (obstacle.GetTile(coordinate))
+                {
+                    obstacle.SetTile(coordinate, null);
+                    numActions--;
+                    lastDeleted = true;
 
 
-                        for (int i = 0; i < list.Count; i++)
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (!obstacle.GetTile(list[i].position))
                         {
-                            if (!obstacle.GetTile(list[i].position))
+
+
+                            if (list[i].tile.GetTileType() == TileBase.tileType.trap)
                             {
-
-
-                                if (list[i].tile.GetTileType() == TileBase.tileType.trap)
-                                {
-                                    man.usedMoney -= list[i].tile.GetTileCost();
-                                }
-                                else if (list[i].tile.GetTileType() == TileBase.tileType.magic)
-                                {
-                                    man.usedMoney -= list[i].tile.GetTileCost();
-                                }
-                                else man.usedMoney -= list[i].tile.GetTileCost();
-
-                                undone.Push(list[i]);
-                                list.RemoveAt(i);
+                                man.usedMoney -= list[i].tile.GetTileCost();
                             }
+                            else if (list[i].tile.GetTileType() == TileBase.tileType.magic)
+                            {
+                                man.usedMoney -= list[i].tile.GetTileCost();
+                            }
+                            else man.usedMoney -= list[i].tile.GetTileCost();
+
+                            undone.Push(list[i]);
+                            list.RemoveAt(i);
                         }
                     }
                 }
             }
         }
-        if (Path.GetTile(coordinate))
+
+        if (Wall.GetTile(coordinate))
         {
             if (deleting)
             {

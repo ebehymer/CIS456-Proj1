@@ -18,9 +18,12 @@ public class PartyBase : MonoBehaviour
 
     public Text text;
 
+    public AudioSource death;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         tiles = GetComponent<TileBase>();
 
         text.text = "Party Contains\n";
@@ -78,9 +81,11 @@ public class PartyBase : MonoBehaviour
                 allDead = false;
                 break;
             }
+            //Play Wilheim Scream - currently when any player dies
+            death.Play();
             allDead = true;
+            
         }
-
         Debug.Log(allDead);
     }
 

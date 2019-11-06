@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Script: TileManager
+//Assignment: Project
+//Description: Handles the buying and selling of tiles
+//Edits made by: Robyn
+//Last edited by and date: Robyn 11/6
+
 public class TrapTile : TileBase
 {
     public TrapTile()
@@ -52,7 +58,7 @@ public class TileManager : MonoBehaviour
     public static EnemyTile enemytile = new EnemyTile();
 
     Vector2 mousePos;
-    RaycastHit2D hit;
+    RaycastHit2D hit, tile;
 
     public LayerMask paths, placable;
 
@@ -87,11 +93,12 @@ public class TileManager : MonoBehaviour
             info.text = "Tile Info:\n" + "Enemy\nCost: " + enemytile.GetTileCost() + "\nDamage: " + enemytile.GetTileDamage();
         }
 
-
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, paths);
-        RaycastHit2D tile = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, placable);
-
+        if (GameManager.current == GameManager.GameState.placing)
+        {
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, paths);
+            tile = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, placable);
+        }
         if (hit)
         {
             if(glow == null)

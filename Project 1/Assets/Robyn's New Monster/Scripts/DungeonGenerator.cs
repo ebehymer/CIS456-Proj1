@@ -2,39 +2,77 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script: DungeonGenerator
+//Assignment: Project
+//Description: Creates a dungeon based on passed in parameters
+//Edits made by: Robyn
+//Last edited by and date: Robyn 11/6
+
 public class DungeonGenerator : MonoBehaviour
 {
+    //The number of turns the dungeon will have
     public int numWayPoints = 4;
+
+    //The number of rows and columns the dungeon can be built in.
     int numRows=12, numColumns=20;
 
-    Vector2[] wayPoints;
+    //Arrays holding the waypoints and objects placed on them
+    public Vector2[] wayPoints;
     public GameObject[] wayPointObj;
+
+    //A boolean value that allows us to build the dungeons ourselves
+    public bool makeRandom;
 
     bool horizontal = false;
 
+    //Prefabs to be created for the dungeon
     public GameObject start, floor, wall, end, holder;
 
+    //The overall path that is built
     List<Vector2> path = new List<Vector2>();
 
     // Start is called before the first frame update
     void Start()
     {
-        if (numWayPoints < 4) numWayPoints = 4;
-        if (numWayPoints % 2 != 0) numWayPoints -= 1;
-        wayPoints = new Vector2[numWayPoints];
-        wayPointObj = new GameObject[numWayPoints];
+        //If the number of waypoints is too low, sets it higher and generates dungeon randomly
+        if (numWayPoints < 4)
+        {
+            numWayPoints = 4;
+            makeRandom = true;
+        }
+        //If an unusable number is passed, sets a usable one and generates dungeon randomly
+        if (numWayPoints % 2 != 0)
+        {
+             numWayPoints -= 1;
+             makeRandom = true;
+        }
 
-        wayPoints[0] = new Vector2(0, Random.Range(1, numRows-1));
+        //If a random dungeon is desired, creates the arrays and sets the start and end points
+        if (makeRandom)
+        {
 
-        wayPointObj[0] = Instantiate(start, wayPoints[0], Quaternion.identity, holder.transform);
-        wayPoints[numWayPoints - 1] = new Vector2(numColumns-1, Random.Range(1, numRows-1));
-        wayPointObj[numWayPoints-1] = Instantiate(end, wayPoints[numWayPoints-1], Quaternion.identity, holder.transform);
+            wayPoints = new Vector2[numWayPoints];
+            wayPointObj = new GameObject[numWayPoints];
 
+            wayPoints[0] = new Vector2(0, Random.Range(1, numRows - 1));
+
+            wayPointObj[0] = Instantiate(start, wayPoints[0], Quaternion.identity, holder.transform);
+            wayPoints[numWayPoints - 1] = new Vector2(numColumns - 1, Random.Range(1, numRows - 1));
+            wayPointObj[numWayPoints - 1] = Instantiate(end, wayPoints[numWayPoints - 1], Quaternion.identity, holder.transform);
+        } else
+        {
+            //If user input is used for the array, sets the start and end points as given
+            wayPointObj = new GameObject[wayPoints.Length];
+            wayPointObj[0] = Instantiate(start, wayPoints[0], Quaternion.identity, holder.transform);
+            wayPointObj[numWayPoints - 1] = Instantiate(end, wayPoints[numWayPoints - 1], Quaternion.identity, holder.transform);
+        }
         GenerateDungeon();
     }
     
+    //A method that generates walls and paths of a dungeon layout
     private void GenerateDungeon()
     {
+        //Fills the background with wall objects
         for(int i = 0; i < numColumns; i++)
         {
             for(int k = 0; k < numRows; k++)
@@ -44,68 +82,77 @@ public class DungeonGenerator : MonoBehaviour
         }
 
 
-
+        //int holders are used to consistency when laying out points
         int X = (int)wayPoints[0].x, Y = (int)wayPoints[0].y;
-        for(int i = 1; i < wayPoints.Length-1; i++)
+
+
+        //If a random dungeon is being made, loops through and generates coordinates
+        //Based on the number of waypoints desired.
+        if (makeRandom)
         {
-            int sign = Random.Range(0, 2);
-            if (i == wayPoints.Length - 2)
+            for (int i = 1; i < wayPoints.Length - 1; i++)
             {
-                X = (int)wayPoints[i - 1].x;
-                Y = (int)wayPoints[i + 1].y;
-            }
-            else if (horizontal)
-            {
-                horizontal = false;
-                if (Y < (numRows / 2))
+                int sign = Random.Range(0, 2);
+
+                //if on the last iteration of the loop, set the values to align with the previous and ending waypoints
+                if (i == wayPoints.Length - 2)
                 {
-                    Y = Y + Random.Range(2, 6);
+                    X = (int)wayPoints[i - 1].x;
+                    Y = (int)wayPoints[i + 1].y;
                 }
-                else Y -= Random.Range(2, 6);
-            }
-            else
-            {
-                horizontal = true;
-                if (X < (numColumns * .75))
+                else if (horizontal)
                 {
-                    X = X + Random.Range(1, 6);
+                    //Based on where the previous Y coordinate was, either increases or decreases the position
+                    horizontal = false;
+                    if (Y < (numRows / 2))
+                    {
+                        Y = Y + Random.Range(2, 6);
+                    }
+                    else Y -= Random.Range(2, 6);
                 }
-                else X -= Random.Range(1, 6);
+                else
+                {
+                    //If the X position is too close to the right edge of the screen
+                    //Sends the X coordinate in a negative direction
+                    horizontal = true;
+                    if (X < (numColumns * .75))
+                    {
+                        X = X + Random.Range(1, 6);
+                    }
+                    else X -= Random.Range(1, 6);
+                }
+                //Adds the generated points to the Waypoints array, and instantiates the new path piece on the spot.
+                wayPoints[i] = new Vector2(X, Y);
+
+                wayPointObj[i] = Instantiate(floor, wayPoints[i], Quaternion.identity, holder.transform);
+
+
+                path.Add(wayPoints[i]);
+
             }
-            wayPoints[i] = new Vector2(X, Y);
-
-            wayPointObj[i] = Instantiate(floor, wayPoints[i], Quaternion.identity, holder.transform);
-            
-
-            path.Add(wayPoints[i]);
-
+        }
+        else
+        {
+            //If a random dungeon is not wanted, just creates path objects at the given points
+            for(int i = 1; i < wayPoints.Length-1; i++)
+            {
+                wayPointObj[i] = Instantiate(floor, wayPoints[i], Quaternion.identity, holder.transform);
+            }
         }
 
 
         horizontal = false;
+
+        //This loop goes through the waypoint objects that were created, and sets
+        //their borders either on or off depending on which direction the path
+        //flows from their position. 
+        //This loop also fills in the positions between each waypoint to create
+        //The connected path of the dungeon
         for(int i = 0; i < wayPoints.Length; i++)
         {
 
-            /*if (wayPointObj[i].GetComponent<Borders>() != null)
-            {
-                if (wayPointObj[i].transform.position.y <= (numRows / 2))
-                {
-                    wayPointObj[i].GetComponent<Borders>().top.SetActive(false);
-                }
-                else wayPointObj[i].GetComponent<Borders>().bottom.SetActive(false);
-
-                if (wayPointObj[i].transform.position.x <= (numColumns * .75))
-                {
-                    wayPointObj[i].GetComponent<Borders>().right.SetActive(false);
-                }
-                else wayPointObj[i].GetComponent<Borders>().left.SetActive(false);
-            }*/
-
             if (horizontal)
             {
-
-                
-
                 if (wayPoints[i].y > wayPoints[i + 1].y)
                 {
 

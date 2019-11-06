@@ -102,7 +102,10 @@ public class PartyBase : MonoBehaviour
                 break;
             }
             //Play Wilheim Scream - currently when any player dies
-            death.Play();
+            if (death != null)
+            {
+                death.Play();
+            }
             allDead = true;
             
         }

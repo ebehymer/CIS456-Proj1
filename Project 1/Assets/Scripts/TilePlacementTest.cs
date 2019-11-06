@@ -27,7 +27,7 @@ public class Action
     }
 }
 
-public class TrapTile : TileBase
+/*public class TrapTile : TileBase
 {
     public TrapTile()
     {
@@ -55,7 +55,7 @@ public class EnemyTile : TileBase
         SetTileType(tileType.enemy);
         SetTileDamage(10);
     }
-}
+}*/
 
 public class TilePlacementTest : MonoBehaviour
 {

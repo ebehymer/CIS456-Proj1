@@ -6,11 +6,11 @@ public class TileSelect : MonoBehaviour
 {
     public TileBase.tileType type;
 
-    TilePlacementTest man;
+    TileManager man;
 
     private void Start()
     {
-        man = GameObject.Find("Tile Manager").GetComponent<TilePlacementTest>(); 
+        man = GameObject.Find("TileManager").GetComponent<TileManager>(); 
     }
 
     private void OnMouseDown()
@@ -28,5 +28,6 @@ public class TileSelect : MonoBehaviour
                 man.placing = man.trap;
                 break;
         }
+        man.deleting = false;
     }
 }

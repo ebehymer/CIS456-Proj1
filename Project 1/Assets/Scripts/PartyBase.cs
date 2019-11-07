@@ -2,7 +2,7 @@
 //Assignment: Project
 //Description: Handles the party of characters and their generation
 //Edits made by: Nicole, Emma, Robyn
-//Last edited by and date: Robyn 10/9
+//Last edited by and date: Nicole 10/16
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,9 +18,12 @@ public class PartyBase : MonoBehaviour
 
     public Text text;
 
+    public AudioSource death;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         tiles = GetComponent<TileBase>();
 
         text.text = "Party Contains\n";
@@ -45,14 +48,34 @@ public class PartyBase : MonoBehaviour
     }
 
     //Deals damage to every member in the party
-    public void DealDamage(int damage)
+    public void DealDamage(int damage, TileBase.tileType tileType)
     {
 
         text.text = "Party Contains\n";
 
         foreach (CharacterBase member in partyMembers)
         {
-            member.SetCharacterHealth(member.GetCharacterHealth() - damage);
+            //Checks for the party member type before dealing the damage
+            //Fighter takes 1/2 damage on enemy tiles
+            if(member.GetCharacterType() == CharacterBase.characterType.Fighter && tileType == TileBase.tileType.enemy)
+            {
+                member.SetCharacterHealth(member.GetCharacterHealth() - (damage / 2));
+            }
+            //Rogue takes 1/2 damage on Trap tiles
+            else if(member.GetCharacterType() == CharacterBase.characterType.Rogue && tileType == TileBase.tileType.trap)
+            {
+                member.SetCharacterHealth(member.GetCharacterHealth() - (damage / 2));
+            }
+            //Wizard takes 1/2 damage on magic tiles
+            else if(member.GetCharacterType() == CharacterBase.characterType.Wizard && tileType == TileBase.tileType.magic)
+            {
+                member.SetCharacterHealth(member.GetCharacterHealth() - (damage/2));
+            }
+            //Otherwise take normal damage
+            else
+            {
+                member.SetCharacterHealth(member.GetCharacterHealth() - damage);
+            }
 
             if (member.GetCharacterHealth() < 0)
             {
@@ -78,9 +101,14 @@ public class PartyBase : MonoBehaviour
                 allDead = false;
                 break;
             }
+            //Play Wilheim Scream - currently when any player dies
+            if (death != null)
+            {
+                death.Play();
+            }
             allDead = true;
+            
         }
-
         Debug.Log(allDead);
     }
 

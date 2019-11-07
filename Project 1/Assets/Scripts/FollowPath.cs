@@ -1,8 +1,8 @@
 ﻿//Script: FollowPath
 //Assignment: Project
 //Description: Guides the Party along the path of the dungeon
-//Edits made by: Robyn
-//Last edited by and date: Robyn 10/9
+//Edits made by: Robyn and Nicole
+//Last edited by and date: Nicole 10/16
 
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +16,8 @@ public class FollowPath : MonoBehaviour
     Vector3Int pos;
     public Tile floor;
     public Grid grid;
+    
+
 
     public Text failure;
 
@@ -32,6 +34,8 @@ public class FollowPath : MonoBehaviour
 
     float stepTime = .1f;
 
+    int mapWidth = 20, mapHeight = 12;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,8 @@ public class FollowPath : MonoBehaviour
         end = grid.WorldToCell(GameObject.Find("End").transform.position);
         man = GameObject.Find("Tile Manager").GetComponent<TilePlacementTest>();
         failure.text = "";
+
+        
     }
 
     private void FixedUpdate()
@@ -62,16 +68,16 @@ public class FollowPath : MonoBehaviour
                 if (!danger.GetTile(TilePlacementTest.list[i].position) && !stepped)
                 {
 
-
+                    //pass in tile type
                     if (TilePlacementTest.list[i].tile.GetTileType() == TileBase.tileType.trap)
                     {
-                        GetComponent<PartyBase>().DealDamage(TilePlacementTest.traptile.GetTileDamage());
+                        GetComponent<PartyBase>().DealDamage(TilePlacementTest.traptile.GetTileDamage(), TileBase.tileType.trap);
                     }
                     else if (TilePlacementTest.list[i].tile.GetTileType() == TileBase.tileType.magic)
                     {
-                        GetComponent<PartyBase>().DealDamage(TilePlacementTest.magictile.GetTileDamage());
+                        GetComponent<PartyBase>().DealDamage(TilePlacementTest.magictile.GetTileDamage(), TileBase.tileType.magic);
                     }
-                    else GetComponent<PartyBase>().DealDamage(TilePlacementTest.enemytile.GetTileDamage());
+                    else GetComponent<PartyBase>().DealDamage(TilePlacementTest.enemytile.GetTileDamage(), TileBase.tileType.enemy);
 
                     stepped = true;
                 }
@@ -171,6 +177,7 @@ public class FollowPath : MonoBehaviour
         yield return null;
     }
 
+   
     public void Restart()
     {
         GameManager.current = GameManager.GameState.placing;

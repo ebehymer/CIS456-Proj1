@@ -143,6 +143,8 @@ public class DungeonGenerator : MonoBehaviour
 
         horizontal = false;
 
+        float zPos = 0;
+
         //This loop goes through the waypoint objects that were created, and sets
         //their borders either on or off depending on which direction the path
         //flows from their position. 
@@ -168,7 +170,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     for (int k = (int)wayPoints[i].y - 1; k > wayPoints[i + 1].y; k--)
                     {
-                        GameObject ins = Instantiate(floor, new Vector2(wayPoints[i].x, k), Quaternion.identity, holder.transform);
+                        GameObject ins = Instantiate(floor, new Vector3(wayPoints[i].x, k, zPos), Quaternion.identity, holder.transform);
+                        zPos -= .1f;
                         ins.GetComponent<Borders>().top.SetActive(false);
                         ins.GetComponent<Borders>().bottom.SetActive(false);
 
@@ -192,7 +195,8 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     for (int k = (int)wayPoints[i].y + 1; k < wayPoints[i + 1].y; k++)
                     {
-                        GameObject ins = Instantiate(floor, new Vector2(wayPoints[i].x, k), Quaternion.identity, holder.transform);
+                        GameObject ins = Instantiate(floor, new Vector3(wayPoints[i].x, k, zPos), Quaternion.identity, holder.transform);
+                        zPos -= .1f;
                         ins.GetComponent<Borders>().top.SetActive(false);
                         ins.GetComponent<Borders>().bottom.SetActive(false);
 
@@ -221,7 +225,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     for (int k = (int)wayPoints[i].x - 1; k > wayPoints[i + 1].x; k--)
                     {
-                        GameObject ins = Instantiate(floor, new Vector2(k, wayPoints[i].y), Quaternion.identity, holder.transform);
+                        GameObject ins = Instantiate(floor, new Vector3(k, wayPoints[i].y, zPos), Quaternion.identity, holder.transform);
+                        zPos -= .1f;
                         ins.GetComponent<Borders>().left.SetActive(false);
                         ins.GetComponent<Borders>().right.SetActive(false);
 
@@ -245,8 +250,8 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     for (int k = (int)wayPoints[i].x + 1; k < wayPoints[i + 1].x; k++)
                     {
-                        GameObject ins = Instantiate(floor, new Vector2(k, wayPoints[i].y), Quaternion.identity, holder.transform);
-                        
+                        GameObject ins = Instantiate(floor, new Vector3(k, wayPoints[i].y, zPos), Quaternion.identity, holder.transform);
+                        zPos -= .1f;
                         ins.transform.localScale = new Vector3(1, .95f, .95f);
                         ins.GetComponent<Borders>().left.SetActive(false);
                         ins.GetComponent<Borders>().right.SetActive(false);

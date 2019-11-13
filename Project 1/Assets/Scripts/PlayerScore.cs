@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScore : MonoBehaviour
 {
@@ -14,12 +15,16 @@ public class PlayerScore : MonoBehaviour
     [SerializeField] private int budget; //get reference for the budget
     [SerializeField] private int spent; //get reference for spent
     private CharacterBase[] party;
+    [SerializeField] int membersAlive = 0;
+    Text membersKilled, budgetScore, totalScore;
 
     // Start is called before the first frame update
     void Start()
     {
-        score = 0;
-        budget = 0;
+        membersKilled = GameObject.Find("PM Amount").GetComponent<Text>();
+        budgetScore = GameObject.Find("B Amount").GetComponent<Text>();
+        totalScore = GameObject.Find("Scored Amount").GetComponent<Text>();
+        CalculateScore();
     }
 
     // Update is called once per frame
@@ -28,35 +33,40 @@ public class PlayerScore : MonoBehaviour
         
     }
 
-    public void CalculateScore()
+    void CalculateMembersAlive()
     {
-        if(spent < budget) //Good score
-        {
-            //Add to score
-        }
-        else if(spent > budget) //Bad score
-        {
-            //Subtract from score
-
-        }
-        //If spent == budget it stays the same
-
         //foreach member in partymember check their health
         //if !isAlive then add to score, otherwise subtract
         party = gameObject.GetComponent<PartyBase>().GetPartyMembers();
         foreach (CharacterBase member in party)
         {
-            if(member.isAlive == false) //if memeber is dead
+            if (member.isAlive == false) //if memeber is dead
             {
-                //Add to score
-
-            }
-            else
-            {
-                //Subtract from score
-
+                //Add to members
+                membersAlive++;
             }
         }
+    }
 
+    IEnumerator DisplayScore()
+    {
+        //Display members killed first
+        score = 50 * membersAlive;
+        membersKilled.text = "(50 x " + membersAlive.ToString() + " )";
+        yield return new WaitForSeconds(2);
+
+        //Display the budget percentage second
+        score += Mathf.FloorToInt(spent/budget);
+        budgetScore.text = Mathf.FloorToInt(spent / budget).ToString() + "%";
+        yield return new WaitForSeconds(2);
+
+        //Display the total score
+        totalScore.text = score.ToString();
+    }
+
+    public void CalculateScore()
+    {
+        CalculateMembersAlive();
+        StartCoroutine(DisplayScore());
     }
 }

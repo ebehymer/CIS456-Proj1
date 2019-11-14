@@ -5685,6 +5685,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69df21c54ccae74dbc682beedc71ae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partyMembers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   allDead: 0
   text: {fileID: 1068678136}
   death: {fileID: 0}
@@ -7636,7 +7640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &450169314677448355
 RectTransform:
   m_ObjectHideFlags: 0

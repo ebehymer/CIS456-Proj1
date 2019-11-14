@@ -2,7 +2,7 @@
 //Assignment: Project
 //Description: Handles the party of characters and their generation
 //Edits made by: Nicole, Emma, Robyn
-//Last edited by and date: Nicole 10/16
+//Last edited by and date: Nicole 11/14
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class PartyBase : MonoBehaviour
 {
-    private CharacterBase[] partyMembers = new CharacterBase[3];
+    [SerializeField] private CharacterBase[] partyMembers = new CharacterBase[3];
     private TileBase tiles;
 
     public bool allDead = false;
@@ -28,7 +28,7 @@ public class PartyBase : MonoBehaviour
 
         text.text = "Party Contains\n";
 
-        GenerateParty();
+        //GenerateRandomParty();
     }
 
     // Update is called once per frame
@@ -134,7 +134,7 @@ public class PartyBase : MonoBehaviour
         }
     }
     //Generates 1 of each character type in the party
-    private void GenerateParty()
+    private void GenerateRandomParty()
     {
         //Adds a prefab to the list for each character type
         for(int index = 0; index < partyMembers.Length; index++)

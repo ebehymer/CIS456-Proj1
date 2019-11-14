@@ -2,7 +2,7 @@
 //Assignment: Project
 //Description: Calculates the score at the end of the level using the budget/spent and party members
 //Edits made by: Nicole
-//Last edited by and date: Nicole 9/23
+//Last edited by and date: Nicole 11/14
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +21,9 @@ public class PlayerScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        budget = GameObject.Find("Budget Manager").GetComponent<BudgetManager>().maxMoney;
+        spent = GameObject.Find("Budget Manager").GetComponent<BudgetManager>().usedMoney;
+
         membersKilled = GameObject.Find("PM Amount").GetComponent<Text>();
         budgetScore = GameObject.Find("B Amount").GetComponent<Text>();
         totalScore = GameObject.Find("Scored Amount").GetComponent<Text>();

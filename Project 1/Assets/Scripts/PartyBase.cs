@@ -47,7 +47,7 @@ public class PartyBase : MonoBehaviour
         return partyMembers;
     }
 
-    //Deals damage to every member in the party
+    //Deals damage to every member in the party based on the tile they move over
     public void DealDamage(int damage, TileBase.tileType tileType)
     {
 
@@ -108,6 +108,51 @@ public class PartyBase : MonoBehaviour
             }
             allDead = true;
             
+        }
+        Debug.Log(allDead);
+    }
+
+    //Deals damage to every member in the party based on the special ability
+    public void DealDamage(int damage)
+    {
+
+        text.text = "Party Contains\n";
+
+        foreach (CharacterBase member in partyMembers)
+        {
+            member.SetCharacterHealth(member.GetCharacterHealth() - damage);
+
+            if (member.GetCharacterHealth() < 0)
+            {
+                Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
+
+                text.text += member.GetCharacterType() + ": Dead\n";
+            }
+            else
+            {
+                Debug.Log(member.GetCharacterType() + " not Dead");//temp holders untill we implement death
+
+                text.text += member.GetCharacterType() + ": " + member.GetCharacterHealth() + "\n";
+            }
+            //Decide how to handle death
+            
+
+        }
+
+        foreach (CharacterBase member in partyMembers)
+        {
+            if (member.GetCharacterHealth() > 0)
+            {
+                allDead = false;
+                break;
+            }
+            //Play Wilheim Scream - currently when any player dies
+            if (death != null)
+            {
+                death.Play();
+            }
+            allDead = true;
+
         }
         Debug.Log(allDead);
     }

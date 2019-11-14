@@ -107,7 +107,8 @@ public class PartyBase : MonoBehaviour
                 death.Play();
             }
             allDead = true;
-            
+
+            //Play Deth Sound here - Wilheim scream?
         }
         Debug.Log(allDead);
     }
@@ -167,7 +168,8 @@ public class PartyBase : MonoBehaviour
             if (member.GetCharacterHealth() < 0)
             {
                 Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
-
+                
+                //Play Death Sound here - either soul death or pit fall probs soul death
                 text.text += member.GetCharacterType() + ": Dead\n";
             }
             else

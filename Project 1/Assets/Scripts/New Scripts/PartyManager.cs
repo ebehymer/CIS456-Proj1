@@ -71,17 +71,17 @@ public class PartyManager : MonoBehaviour
             {
                 if(man.wayPoints[i].x > man.wayPoints[i + 1].x)
                 {
-                    for(float k = man.wayPoints[i].x; k >= man.wayPoints[i+1].x; k--)
+                    for(float k = man.wayPoints[i].x-1; k >= man.wayPoints[i+1].x; k--)
                     {
-                        transform.position = new Vector2(k, transform.position.y);
+                        transform.position = new Vector3(k, transform.position.y);
                         yield return new WaitForSeconds(waitTime);
                     }
                 }
                 else
                 {
-                    for (float k = man.wayPoints[i].x; k <= man.wayPoints[i + 1].x; k++)
+                    for (float k = man.wayPoints[i].x+1; k <= man.wayPoints[i + 1].x; k++)
                     {
-                        transform.position = new Vector2(k, transform.position.y);
+                        transform.position = new Vector3(k, transform.position.y);
                         yield return new WaitForSeconds(waitTime);
                     }
                 }
@@ -90,17 +90,17 @@ public class PartyManager : MonoBehaviour
             {
                 if (man.wayPoints[i].y > man.wayPoints[i + 1].y)
                 {
-                    for (float k = man.wayPoints[i].y; k >= man.wayPoints[i + 1].y; k--)
+                    for (float k = man.wayPoints[i].y-1; k >= man.wayPoints[i + 1].y; k--)
                     {
-                        transform.position = new Vector2(transform.position.x, k);
+                        transform.position = new Vector3(transform.position.x, k);
                         yield return new WaitForSeconds(waitTime);
                     }
                 }
                 else
                 {
-                    for (float k = man.wayPoints[i].y; k <= man.wayPoints[i + 1].y; k++)
+                    for (float k = man.wayPoints[i].y+1; k <= man.wayPoints[i + 1].y; k++)
                     {
-                        transform.position = new Vector2(transform.position.x, k);
+                        transform.position = new Vector3(transform.position.x, k);
                         yield return new WaitForSeconds(waitTime);
                     }
                 }

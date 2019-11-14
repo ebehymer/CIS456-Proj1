@@ -29,6 +29,8 @@ public class PartyBase : MonoBehaviour
         text.text = "Party Contains\n";
 
         //GenerateRandomParty();
+
+        updateText();
     }
 
     // Update is called once per frame

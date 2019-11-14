@@ -2,7 +2,7 @@
 //Assignment: Project
 //Description: Handles the party of characters and their generation
 //Edits made by: Nicole, Emma, Robyn
-//Last edited by and date: Nicole 10/16
+//Last edited by and date: Emma 11/14
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ public class PartyBase : MonoBehaviour
 
     public Text text;
 
-    public AudioSource death;
+    public AudioSource allDeath, death;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +82,7 @@ public class PartyBase : MonoBehaviour
                 Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
 
                 text.text += member.GetCharacterType() + ": Dead\n";
+                death.Play();
             }
             else
             {
@@ -102,13 +103,12 @@ public class PartyBase : MonoBehaviour
                 break;
             }
             //Play Wilheim Scream - currently when any player dies
-            if (death != null)
+            if (allDeath != null && allDead == true)
             {
-                death.Play();
+                allDeath.Play();
             }
             allDead = true;
-
-            //Play Deth Sound here - Wilheim scream?
+           
         }
         Debug.Log(allDead);
     }
@@ -126,6 +126,7 @@ public class PartyBase : MonoBehaviour
                 
                 //Play Death Sound here - either soul death or pit fall probs soul death
                 text.text += member.GetCharacterType() + ": Dead\n";
+           
             }
             else
             {

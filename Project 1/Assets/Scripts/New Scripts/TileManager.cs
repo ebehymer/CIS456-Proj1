@@ -70,6 +70,7 @@ public class TileManager : MonoBehaviour
     Stack<GameObject> undone = new Stack<GameObject>();
 
     Stack<GameObject> deleted = new Stack<GameObject>();
+    public AudioSource PlacingSound, SellingSound;
 
     // Start is called before the first frame update
     void Start()

@@ -11,7 +11,7 @@ using UnityEngine;
 public class SpecialAbility : MonoBehaviour
 {
     private PartyBase partyScript;
-    [SerializeField] private int abilityDamage;
+    [SerializeField] private int abilityDamage = 20;
 
     // Start is called before the first frame update
     void Start()

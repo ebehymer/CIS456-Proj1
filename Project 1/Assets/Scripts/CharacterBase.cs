@@ -12,8 +12,8 @@ public class CharacterBase : MonoBehaviour
 {
     public enum characterType { Rogue, Wizard, Fighter };
 
-    protected characterType type;
-    protected int characterHealth;
+    [SerializeField] protected characterType type;
+    [SerializeField] protected int characterHealth;
     public int maxHealth;
     public bool isAlive;
 

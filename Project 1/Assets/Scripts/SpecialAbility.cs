@@ -28,9 +28,16 @@ public class SpecialAbility : MonoBehaviour
         
     }
 
+    IEnumerator WaitToChange()
+    {
+        yield return new WaitForSeconds(2f);
+        menMan.GoToScore();
+    }
+
     public void ActivateAbility()
     {
         partyScript.DealDamage(abilityDamage);
-        menMan.GoToScore();
+        StartCoroutine(WaitToChange());
+        //menMan.GoToScore();
     }
 }

@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] List<Menu> menus = new List<Menu>();
     public GameObject pauseMenu;
     public GameObject mainMenu;
+    public Menu scoreMenu;
     private bool isInMainMenu;
     //private int buildIndex;
 

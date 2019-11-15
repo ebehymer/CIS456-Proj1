@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class PlayerScore : MonoBehaviour
 {
-    [SerializeField] private int score;
+    [SerializeField] private float score;
     [SerializeField] private int budget; //get reference for the budget
     [SerializeField] private int spent; //get reference for spent
     private CharacterBase[] party;
@@ -27,6 +27,7 @@ public class PlayerScore : MonoBehaviour
         membersKilled = GameObject.Find("PM Amount").GetComponent<Text>();
         budgetScore = GameObject.Find("B Amount").GetComponent<Text>();
         totalScore = GameObject.Find("Scored Amount").GetComponent<Text>();
+        CalculateMembersAlive();
         CalculateScore();
     }
 
@@ -40,7 +41,8 @@ public class PlayerScore : MonoBehaviour
     {
         //foreach member in partymember check their health
         //if !isAlive then add to score, otherwise subtract
-        party = gameObject.GetComponent<PartyBase>().GetPartyMembers();
+        party = GameObject.Find("Party").GetComponent<PartyBase>().GetPartyMembers();
+        //party = GameObject.GetComponent<PartyBase>().GetPartyMembers();
         foreach (CharacterBase member in party)
         {
             if (member.isAlive == false) //if memeber is dead
@@ -49,18 +51,23 @@ public class PlayerScore : MonoBehaviour
                 membersAlive++;
             }
         }
+        Debug.Log("Members Alive: " + membersAlive);
     }
 
     IEnumerator DisplayScore()
     {
         //Display members killed first
         score = 50 * membersAlive;
-        membersKilled.text = "(50 x " + membersAlive.ToString() + " )";
+        Debug.Log("Score after members: " + score);
+        membersKilled.text = "(50 x " + membersAlive + " )";
         yield return new WaitForSeconds(2);
 
+        Debug.Log("HERE IT IS---------Budget: " + budget + "--Spent: "+ spent);
+
         //Display the budget percentage second
-        score += Mathf.FloorToInt(spent/budget);
-        budgetScore.text = Mathf.FloorToInt(spent / budget).ToString() + "%";
+        score += ((spent/budget)*100);
+        Debug.Log("Spent / budget: " + ((spent / budget)*100));
+        budgetScore.text = ((spent / budget)*100) + "%";
         yield return new WaitForSeconds(2);
 
         //Display the total score
@@ -69,7 +76,6 @@ public class PlayerScore : MonoBehaviour
 
     public void CalculateScore()
     {
-        CalculateMembersAlive();
         StartCoroutine(DisplayScore());
     }
 }

@@ -82,7 +82,7 @@ public class PartyBase : MonoBehaviour
             if (member.GetCharacterHealth() < 0)
             {
                 Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
-
+                member.isAlive = false;
                 text.text += member.GetCharacterType() + ": Dead\n";
             }
             else

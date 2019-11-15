@@ -906,6 +906,15 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 352763019}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: scoreMenu
+      value: 
+      objectReference: {fileID: 1590839368}
+    - target: {fileID: 2127417208, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.10003662
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
 --- !u!1 &1767607453
@@ -1412,16 +1421,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Party
       objectReference: {fileID: 0}
-    - target: {fileID: 9167584911266277406, guid: 0dff612c2f4416142a37b1cec33edc78,
-        type: 3}
-      propertyPath: fail
-      value: 
-      objectReference: {fileID: 964305588}
-    - target: {fileID: 9167584911266277406, guid: 0dff612c2f4416142a37b1cec33edc78,
-        type: 3}
-      propertyPath: score
-      value: 
-      objectReference: {fileID: 1590839373}
     - target: {fileID: 9167584911266277394, guid: 0dff612c2f4416142a37b1cec33edc78,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1477,6 +1476,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9167584911266277406, guid: 0dff612c2f4416142a37b1cec33edc78,
+        type: 3}
+      propertyPath: fail
+      value: 
+      objectReference: {fileID: 964305588}
+    - target: {fileID: 9167584911266277406, guid: 0dff612c2f4416142a37b1cec33edc78,
+        type: 3}
+      propertyPath: score
+      value: 
+      objectReference: {fileID: 1590839373}
     - target: {fileID: 9167584911266277407, guid: 0dff612c2f4416142a37b1cec33edc78,
         type: 3}
       propertyPath: text

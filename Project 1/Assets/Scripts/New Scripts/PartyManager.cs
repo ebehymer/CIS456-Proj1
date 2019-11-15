@@ -7,14 +7,15 @@ using UnityEngine.UI;
 //Assignment: Project
 //Description: Guides the party along the dungeon path
 //Edits made by: Robyn
-//Last edited by and date: Robyn 11/6
+//Last edited by and date: Nicole 11/14
 
 public class PartyManager : MonoBehaviour
 {
     DungeonGenerator man;
+    MenuManager menMan;
     bool moveHoriz;
 
-    public Text fail;
+    //public Text fail;
 
     public float waitTime;
 
@@ -26,7 +27,8 @@ public class PartyManager : MonoBehaviour
     void Start()
     {
         man = GameObject.Find("DungeonManager").GetComponent<DungeonGenerator>();
-        fail.text = "";
+        menMan = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
+        //fail.text = "";
     }
 
     private void Update()
@@ -111,9 +113,10 @@ public class PartyManager : MonoBehaviour
 
         if (!GetComponent<PartyBase>().allDead)
         {
-            fail.text = "Quest Failed";
+            menMan.ShowMenu(menMan.scoreMenu);
+            //fail.text = "Quest Failed";
             yield return new WaitForSeconds(2.0f);
-            fail.text = "";
+            //fail.text = "";
             Restart();
         }
     }

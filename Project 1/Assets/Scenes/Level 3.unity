@@ -278,6 +278,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   numActions: 0
+  TrapSound: {fileID: 0}
+  MagicSound: {fileID: 0}
+  EnemySound: {fileID: 0}
+  RedoSound: {fileID: 0}
+  SellSound: {fileID: 0}
 --- !u!114 &722548942 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 722548942, guid: 7658920a295905240a02de64f3ffc59e,
@@ -979,7 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   total: {fileID: 95383403}
   used: {fileID: 722548942}
-  maxMoney: 2000
+  maxMoney: 2500
   usedMoney: 0
 --- !u!4 &1802562625
 Transform:

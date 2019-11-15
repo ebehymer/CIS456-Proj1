@@ -288,6 +288,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   numActions: 0
+  TrapSound: {fileID: 0}
+  MagicSound: {fileID: 0}
+  EnemySound: {fileID: 0}
+  RedoSound: {fileID: 0}
+  SellSound: {fileID: 0}
 --- !u!4 &521389185
 Transform:
   m_ObjectHideFlags: 0
@@ -623,7 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   total: {fileID: 1325974478}
   used: {fileID: 1325974477}
-  maxMoney: 1000
+  maxMoney: 2000
   usedMoney: 0
 --- !u!4 &1252847526
 Transform:
@@ -1121,17 +1126,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8f44ebd404b9f469aed000320a3c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numWayPoints: 10
+  numWayPoints: 12
   wayPoints:
-  - {x: 0, y: 7}
-  - {x: 5, y: 5}
-  - {x: 5, y: 8}
-  - {x: 13, y: 8}
-  - {x: 13, y: 5}
-  - {x: 19, y: 5}
-  - {x: 19, y: 5}
-  - {x: 19, y: 5}
-  - {x: 19, y: 5}
+  - {x: 0, y: 6}
+  - {x: 2, y: 6}
+  - {x: 2, y: 10}
+  - {x: 7, y: 10}
+  - {x: 7, y: 4}
+  - {x: 4, y: 4}
+  - {x: 4, y: 2}
+  - {x: 10, y: 2}
+  - {x: 10, y: 9}
+  - {x: 15, y: 9}
+  - {x: 15, y: 5}
   - {x: 19, y: 5}
   wayPointObj: []
   makeRandom: 0
@@ -1148,7 +1155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509437551}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 7, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1239,7 +1246,7 @@ PrefabInstance:
     - target: {fileID: 9167584911266277407, guid: 0dff612c2f4416142a37b1cec33edc78,
         type: 3}
       propertyPath: partyMembers.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9167584911266277407, guid: 0dff612c2f4416142a37b1cec33edc78,
         type: 3}
@@ -1250,12 +1257,12 @@ PrefabInstance:
         type: 3}
       propertyPath: partyMembers.Array.data[0]
       value: 
-      objectReference: {fileID: 916888867}
+      objectReference: {fileID: 1371642166}
     - target: {fileID: 9167584911266277407, guid: 0dff612c2f4416142a37b1cec33edc78,
         type: 3}
       propertyPath: partyMembers.Array.data[1]
       value: 
-      objectReference: {fileID: 916888867}
+      objectReference: {fileID: 1387849081}
     - target: {fileID: 9167584911266277407, guid: 0dff612c2f4416142a37b1cec33edc78,
         type: 3}
       propertyPath: partyMembers.Array.data[2]

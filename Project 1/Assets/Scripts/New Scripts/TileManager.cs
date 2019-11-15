@@ -85,15 +85,15 @@ public class TileManager : MonoBehaviour
     {
         if (placing == trap)
         {
-            info.text = "Tile Info:\n" + "Trap\nCost: " + traptile.GetTileCost() + "\nDamage: " + traptile.GetTileDamage();
+            info.text = "Tile Info:" + "Trap\nCost: " + traptile.GetTileCost() + "\nDamage: " + traptile.GetTileDamage() + "\nRogues take Half";
         }
         else if (placing == magic)
         {
-            info.text = "Tile Info:\n" + "Magic\nCost: " + magictile.GetTileCost() + "\nDamage: " + magictile.GetTileDamage();
+            info.text = "Tile Info:" + "Magic\nCost: " + magictile.GetTileCost() + "\nDamage: " + magictile.GetTileDamage() + "\nWizards take Half";
         }
         else if (placing == enemy)
         {
-            info.text = "Tile Info:\n" + "Enemy\nCost: " + enemytile.GetTileCost() + "\nDamage: " + enemytile.GetTileDamage();
+            info.text = "Tile Info:" + "Enemy\nCost: " + enemytile.GetTileCost() + "\nDamage: " + enemytile.GetTileDamage() + "\nFighters take Half";
         }
 
         if (GameManager.current == GameManager.GameState.placing)
@@ -134,16 +134,19 @@ public class TileManager : MonoBehaviour
                     if(placing == trap)
                     {
                         man.usedMoney += traptile.GetTileCost();
+                        if(TrapSound != null)
                         TrapSound.Play();
                     }
                     else if (placing == magic)
                     {
                         man.usedMoney += magictile.GetTileCost();
+                        if(MagicSound != null)
                         MagicSound.Play();
                     }
                     else if (placing == enemy)
                     {
                         man.usedMoney += enemytile.GetTileCost();
+                        if (EnemySound != null)
                         EnemySound.Play();
                     }
 

@@ -161,6 +161,7 @@ public class PartyManager : MonoBehaviour
         if (GameManager.current == GameManager.GameState.placing)
         {
             moveHoriz = true;
+            if (FinishedSound != null) 
             FinishedSound.Play();
             partyMove = StartCoroutine(Walk());
         }

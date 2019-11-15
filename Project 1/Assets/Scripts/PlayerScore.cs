@@ -58,16 +58,15 @@ public class PlayerScore : MonoBehaviour
     {
         //Display members killed first
         score = 50 * membersAlive;
-        Debug.Log("Score after members: " + score);
         membersKilled.text = "(50 x " + membersAlive + " )";
         yield return new WaitForSeconds(2);
 
         Debug.Log("HERE IT IS---------Budget: " + budget + "--Spent: "+ spent);
 
         //Display the budget percentage second
-        score += ((spent/budget)*100);
-        Debug.Log("Spent / budget: " + ((spent / budget)*100));
-        budgetScore.text = ((spent / budget)*100) + "%";
+        score += (((float)spent/(float)budget)*100);
+        Debug.Log("Spent / budget: " + (((float)spent / (float)budget)*100));
+        budgetScore.text = (((float)spent / (float)budget)*100) + "%";
         yield return new WaitForSeconds(2);
 
         //Display the total score

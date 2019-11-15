@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //Script: PartyManager
 //Assignment: Project
@@ -63,6 +64,11 @@ public class PartyManager : MonoBehaviour
         if (GetComponent<PartyBase>().allDead)
         {
             StopCoroutine(partyMove);
+            if(menuMan.scoreMenu.activeSelf == false)
+            {
+                
+                menuMan.scoreMenu.SetActive(true);
+            }
         }
     }
 
@@ -121,12 +127,23 @@ public class PartyManager : MonoBehaviour
 
             if (bugMan.usedMoney >= bugMan.maxMoney / 2)
             {
-                menuMan.specialAbilityMenu.SetActive(false);
-                menuMan.scoreMenu.SetActive(true);
+                    menuMan.specialAbilityMenu.SetActive(false);
+                    menuMan.scoreMenu.SetActive(true);
+                Debug.Log("Special");
             }
             else
             {
-                menuMan.specialAbilityMenu.SetActive(true);
+
+                if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 1") && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 2"))
+                {
+                    menuMan.specialAbilityMenu.SetActive(true);
+                    Debug.Log("Special");
+                }
+                else
+                {
+                    menuMan.specialAbilityMenu.SetActive(false);
+                    menuMan.scoreMenu.SetActive(true);
+                }
             }
             //menMan.ShowMenu(menMan.scoreMenu);
             //menMan.specialAbilityMenu.SetActive(true);

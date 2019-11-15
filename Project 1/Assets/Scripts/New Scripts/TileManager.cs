@@ -6,8 +6,8 @@ using UnityEngine.UI;
 //Script: TileManager
 //Assignment: Project
 //Description: Handles the buying and selling of tiles
-//Edits made by: Robyn
-//Last edited by and date: Robyn 11/6
+//Edits made by: Robyn, Emma
+//Last edited by and date: Emma 11/14
 
 public class TrapTile : TileBase
 {
@@ -70,12 +70,14 @@ public class TileManager : MonoBehaviour
     Stack<GameObject> undone = new Stack<GameObject>();
 
     Stack<GameObject> deleted = new Stack<GameObject>();
-    public AudioSource PlacingSound, SellingSound;
+
+    public AudioSource TrapSound, MagicSound, EnemySound, RedoSound, SellSound;
 
     // Start is called before the first frame update
     void Start()
     {
         man = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
+        
     }
 
     // Update is called once per frame
@@ -132,14 +134,17 @@ public class TileManager : MonoBehaviour
                     if(placing == trap)
                     {
                         man.usedMoney += traptile.GetTileCost();
+                        TrapSound.Play();
                     }
                     else if (placing == magic)
                     {
                         man.usedMoney += magictile.GetTileCost();
+                        MagicSound.Play();
                     }
                     else if (placing == enemy)
                     {
                         man.usedMoney += enemytile.GetTileCost();
+                        EnemySound.Play();
                     }
 
                     actions.Push(Instantiate(placing, hit.collider.transform.position, Quaternion.identity));
@@ -168,8 +173,10 @@ public class TileManager : MonoBehaviour
                     holder.GetComponent<BoxCollider2D>().enabled = false;
                     lastDeleted = true;
                     actions.TrimExcess();
+                    SellSound.Play();
                     if(holder.name == "Trap(Clone)")
                     {
+                     
                         man.usedMoney -= traptile.GetTileCost();
                     }
                     else if (holder.name == "Magic(Clone)")
@@ -180,6 +187,7 @@ public class TileManager : MonoBehaviour
                     {
                         man.usedMoney -= enemytile.GetTileCost();
                     }
+                 
                 }
             }
         } else
@@ -205,8 +213,8 @@ public class TileManager : MonoBehaviour
             numActions++;
             undoneCount--;
             numDeleted++;
-
-            if(redone.name == "Trap(Clone)")
+            RedoSound.Play();
+            if (redone.name == "Trap(Clone)")
             {
                 man.usedMoney += traptile.GetTileCost();
             }
@@ -226,7 +234,8 @@ public class TileManager : MonoBehaviour
             holder.GetComponent<SpriteRenderer>().enabled = false;
             undoneCount++;
             numActions--;
-            if(holder.name == "Trap(Clone)")
+            RedoSound.Play();
+            if (holder.name == "Trap(Clone)")
             {
                 man.usedMoney -= traptile.GetTileCost();
             }
@@ -254,6 +263,7 @@ public class TileManager : MonoBehaviour
                 undoneCount++;
                 numActions--;
                 numDeleted--;
+                RedoSound.Play();
                 if (holder.name == "Trap(Clone)")
                 {
                     man.usedMoney -= traptile.GetTileCost();
@@ -275,7 +285,8 @@ public class TileManager : MonoBehaviour
             holder.GetComponent<SpriteRenderer>().enabled = true;
             undoneCount--;
             numActions++;
-            if(holder.name == "Trap(Clone)")
+            RedoSound.Play();
+            if (holder.name == "Trap(Clone)")
             {
                 man.usedMoney += traptile.GetTileCost();
             } 
@@ -294,4 +305,6 @@ public class TileManager : MonoBehaviour
     {
         deleting = !deleting;
     }
+
+   
 }

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 //Script: PartyManager
 //Assignment: Project
 //Description: Guides the party along the dungeon path
-//Edits made by: Robyn
-//Last edited by and date: Robyn 11/6
+//Edits made by: Robyn, Emma
+//Last edited by and date: Emma 11/14
 
 public class PartyManager : MonoBehaviour
 {
@@ -21,6 +21,8 @@ public class PartyManager : MonoBehaviour
     RaycastHit2D col;
 
     List<GameObject> stepped = new List<GameObject>();
+
+    public AudioSource FinishedSound;
 
     // Start is called before the first frame update
     void Start()
@@ -124,6 +126,7 @@ public class PartyManager : MonoBehaviour
         if (GameManager.current == GameManager.GameState.placing)
         {
             moveHoriz = true;
+            FinishedSound.Play();
             partyMove = StartCoroutine(Walk());
         }
     }

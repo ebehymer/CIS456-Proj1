@@ -116,9 +116,9 @@ public class PartyManager : MonoBehaviour
             //menMan.ShowMenu(menMan.scoreMenu);
             menMan.specialAbilityMenu.SetActive(true);
             //fail.text = "Quest Failed";
-            yield return new WaitForSeconds(2.0f);
+            //yield return new WaitForSeconds(4.0f);
             //fail.text = "";
-            Restart();
+            //Restart();
         }
     }
 

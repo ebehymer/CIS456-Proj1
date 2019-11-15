@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2172875249659684149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2172875249659684299}
+  - component: {fileID: 2172875249659684298}
+  m_Layer: 0
+  m_Name: TileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2172875249659684299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172875249659684149}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.3697674, y: 4.0411773, z: -232.87962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2172875249659684298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172875249659684149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54cfeb185ff31ff4aa9adf56303460e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placing: {fileID: 0}
+  trap: {fileID: 7957942003277371156, guid: 99b9d92709f9d664bb35c2607b77b284, type: 3}
+  magic: {fileID: 9118988859180802000, guid: 64259a6d9c364ef41ae4e1756c52066d, type: 3}
+  enemy: {fileID: 641030718568053316, guid: 3c099845f2142f14d9c372259e56e927, type: 3}
+  placeGlow: {fileID: 19492738111848368, guid: 3740fa3b5e83eb647a0c5d561ad6d256, type: 3}
+  deleteGlow: {fileID: 19492738111848368, guid: b2075d395a5769944a4327d2d9d5c7c6,
+    type: 3}
+  deleting: 0
+  lastDeleted: 0
+  info: {fileID: 0}
+  paths:
+    serializedVersion: 2
+    m_Bits: 256
+  placable:
+    serializedVersion: 2
+    m_Bits: 512
+  numActions: 0
+  TrapSound: {fileID: 0}
+  MagicSound: {fileID: 0}
+  EnemySound: {fileID: 0}
+  RedoSound: {fileID: 0}
+  SellSound: {fileID: 0}

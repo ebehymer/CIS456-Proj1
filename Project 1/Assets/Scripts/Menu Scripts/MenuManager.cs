@@ -58,6 +58,16 @@ public class MenuManager : MonoBehaviour
 
     }
 
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Select()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void PauseGame()
     {
         pauseMenu.SetActive(true);

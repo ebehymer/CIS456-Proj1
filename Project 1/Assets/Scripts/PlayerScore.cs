@@ -43,12 +43,19 @@ public class PlayerScore : MonoBehaviour
         //if !isAlive then add to score, otherwise subtract
         party = GameObject.Find("Party").GetComponent<PartyBase>().GetPartyMembers();
         //party = GameObject.GetComponent<PartyBase>().GetPartyMembers();
-        foreach (CharacterBase member in party)
+        if (FindObjectOfType<PartyBase>().allDead)
         {
-            if (member.isAlive == false) //if memeber is dead
+            membersAlive = party.Length;
+        }
+        else
+        {
+            foreach (CharacterBase member in party)
             {
-                //Add to members
-                membersAlive++;
+                if (member.isAlive == false) //if memeber is dead
+                {
+                    //Add to members
+                    membersAlive++;
+                }
             }
         }
         Debug.Log("Members Alive: " + membersAlive);

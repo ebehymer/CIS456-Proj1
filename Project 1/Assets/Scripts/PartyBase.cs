@@ -2,7 +2,7 @@
 //Assignment: Project
 //Description: Handles the party of characters and their generation
 //Edits made by: Nicole, Emma, Robyn
-//Last edited by and date: Emma 11/14
+//Last edited by and date: Nicole 11/14
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class PartyBase : MonoBehaviour
 {
-    private CharacterBase[] partyMembers = new CharacterBase[3];
+    [SerializeField] private CharacterBase[] partyMembers = new CharacterBase[3];
     private TileBase tiles;
 
     public bool allDead = false;
@@ -28,7 +28,9 @@ public class PartyBase : MonoBehaviour
 
         text.text = "Party Contains\n";
 
-        GenerateParty();
+        //GenerateRandomParty();
+
+        updateText();
     }
 
     // Update is called once per frame
@@ -47,7 +49,7 @@ public class PartyBase : MonoBehaviour
         return partyMembers;
     }
 
-    //Deals damage to every member in the party
+    //Deals damage to every member in the party based on the tile they move over
     public void DealDamage(int damage, TileBase.tileType tileType)
     {
 
@@ -80,7 +82,7 @@ public class PartyBase : MonoBehaviour
             if (member.GetCharacterHealth() < 0)
             {
                 Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
-
+                member.isAlive = false;
                 text.text += member.GetCharacterType() + ": Dead\n";
                 death.Play();
             }
@@ -113,6 +115,51 @@ public class PartyBase : MonoBehaviour
         Debug.Log(allDead);
     }
 
+    //Deals damage to every member in the party based on the special ability
+    public void DealDamage(int damage)
+    {
+
+        text.text = "Party Contains\n";
+
+        foreach (CharacterBase member in partyMembers)
+        {
+            member.SetCharacterHealth(member.GetCharacterHealth() - damage);
+
+            if (member.GetCharacterHealth() < 0)
+            {
+                Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
+
+                text.text += member.GetCharacterType() + ": Dead\n";
+            }
+            else
+            {
+                Debug.Log(member.GetCharacterType() + " not Dead");//temp holders untill we implement death
+
+                text.text += member.GetCharacterType() + ": " + member.GetCharacterHealth() + "\n";
+            }
+            //Decide how to handle death
+            
+
+        }
+
+        foreach (CharacterBase member in partyMembers)
+        {
+            if (member.GetCharacterHealth() > 0)
+            {
+                allDead = false;
+                break;
+            }
+            //Play Wilheim Scream - currently when any player dies
+            if (death != null)
+            {
+                death.Play();
+            }
+            allDead = true;
+
+        }
+        Debug.Log(allDead);
+    }
+
     public void updateText()
     {
 
@@ -137,7 +184,7 @@ public class PartyBase : MonoBehaviour
         }
     }
     //Generates 1 of each character type in the party
-    private void GenerateParty()
+    private void GenerateRandomParty()
     {
         //Adds a prefab to the list for each character type
         for(int index = 0; index < partyMembers.Length; index++)

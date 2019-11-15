@@ -9,13 +9,23 @@ public class MenuManager : MonoBehaviour
     [SerializeField] List<Menu> menus = new List<Menu>();
     public GameObject pauseMenu;
     public GameObject mainMenu;
+    public GameObject specialAbilityMenu;
+    public GameObject scoreMenu;
+    //public Menu scoreMenu;
     private bool isInMainMenu;
     //private int buildIndex;
+
+    //private BudgetManager bugMan;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(SceneManager.GetActiveScene().name == "Main Menu")
+        // Makes sure the ability menu is off at start
+        specialAbilityMenu.SetActive(false);
+
+       // bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
+
+        if (SceneManager.GetActiveScene().name == "Main Menu")
         {
             isInMainMenu = true;
             mainMenu.SetActive(true);
@@ -28,14 +38,14 @@ public class MenuManager : MonoBehaviour
         ShowMenu(menus[0]);
         pauseMenu.SetActive(false);
 
-       // buildIndex = SceneManager.GetActiveScene().buildIndex;
+        // buildIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     void Update()
     {
         Debug.Log("isInMainMenu is currently set to: " + isInMainMenu);
 
-        if(Input.GetKeyDown(KeyCode.Escape) && !isInMainMenu)
+        if (Input.GetKeyDown(KeyCode.Escape) && !isInMainMenu)
         {
             PauseGame();
         }
@@ -46,6 +56,16 @@ public class MenuManager : MonoBehaviour
             mainMenu.SetActive(false);
         }
 
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Select()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void PauseGame()
@@ -81,29 +101,26 @@ public class MenuManager : MonoBehaviour
         Debug.Log("You have quit the game.");
     }
 
-    //public void ReplayLevel()
-    //{
-    //    SceneManager.LoadScene(buildIndex);
-    //}
-
-    //public void NextLevel()
-    //{
-    //    SceneManager.LoadScene(buildIndex + 1);
-    //}
+    // This is the No buttons functionality. This could probably be more effective elsewhere
+    public void GoToScore()
+    {
+        specialAbilityMenu.SetActive(false);
+        scoreMenu.SetActive(true);
+    }
 
     public void ShowMenu(Menu menuToShow)
     {
-        if(menus.Contains(menuToShow) == false)
+        if (menus.Contains(menuToShow) == false)
         {
             Debug.LogErrorFormat("{ 0} is not in the list of menus", menuToShow.name);
             return;
         }
 
-        foreach(Menu otherMenu in menus)
+        foreach (Menu otherMenu in menus)
         {
 
             // Is this the menu we want to display?
-            if(otherMenu == menuToShow)
+            if (otherMenu == menuToShow)
             {
                 // Mark it as active.
                 otherMenu.gameObject.SetActive(true);
@@ -114,7 +131,7 @@ public class MenuManager : MonoBehaviour
             else
             {
                 // Is the menu currently active?
-                if(otherMenu.gameObject.activeInHierarchy)
+                if (otherMenu.gameObject.activeInHierarchy)
                 {
                     // If so, tell the Menu object to invoke its "will disappear" action
                     otherMenu.menuWillDisappear.Invoke();

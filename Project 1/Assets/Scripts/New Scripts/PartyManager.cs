@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //Script: PartyManager
 //Assignment: Project
 //Description: Guides the party along the dungeon path
 //Edits made by: Robyn, Emma
-//Last edited by and date: Emma 11/14
+//Last edited by and date: Nicole 11/14
 
 public class PartyManager : MonoBehaviour
 {
     DungeonGenerator man;
+    MenuManager menMan;
     bool moveHoriz;
 
-    public Text fail;
+    //public Text fail;
 
     public float waitTime;
 
@@ -23,12 +25,17 @@ public class PartyManager : MonoBehaviour
     List<GameObject> stepped = new List<GameObject>();
 
     public AudioSource FinishedSound;
+    private BudgetManager bugMan;
+    private MenuManager menuMan;
 
     // Start is called before the first frame update
     void Start()
     {
+        menuMan = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
+        bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
         man = GameObject.Find("DungeonManager").GetComponent<DungeonGenerator>();
-        fail.text = "";
+        menMan = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
+        //fail.text = "";
     }
 
     private void Update()
@@ -58,6 +65,11 @@ public class PartyManager : MonoBehaviour
         if (GetComponent<PartyBase>().allDead)
         {
             StopCoroutine(partyMove);
+            if(menuMan.scoreMenu.activeSelf == false)
+            {
+                
+                menuMan.scoreMenu.SetActive(true);
+            }
         }
     }
 
@@ -113,10 +125,33 @@ public class PartyManager : MonoBehaviour
 
         if (!GetComponent<PartyBase>().allDead)
         {
-            fail.text = "Quest Failed";
-            yield return new WaitForSeconds(2.0f);
-            fail.text = "";
-            Restart();
+
+            if (bugMan.usedMoney >= bugMan.maxMoney / 2)
+            {
+                    menuMan.specialAbilityMenu.SetActive(false);
+                    menuMan.scoreMenu.SetActive(true);
+                Debug.Log("Special");
+            }
+            else
+            {
+
+                if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 1") && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 2"))
+                {
+                    menuMan.specialAbilityMenu.SetActive(true);
+                    Debug.Log("Special");
+                }
+                else
+                {
+                    menuMan.specialAbilityMenu.SetActive(false);
+                    menuMan.scoreMenu.SetActive(true);
+                }
+            }
+            //menMan.ShowMenu(menMan.scoreMenu);
+            //menMan.specialAbilityMenu.SetActive(true);
+            //fail.text = "Quest Failed";
+            //yield return new WaitForSeconds(4.0f);
+            //fail.text = "";
+            //Restart();
         }
     }
 

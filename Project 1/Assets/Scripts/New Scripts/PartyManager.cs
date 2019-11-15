@@ -23,9 +23,14 @@ public class PartyManager : MonoBehaviour
 
     List<GameObject> stepped = new List<GameObject>();
 
+    private BudgetManager bugMan;
+    private MenuManager menuMan;
+
     // Start is called before the first frame update
     void Start()
     {
+        menuMan = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
+        bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
         man = GameObject.Find("DungeonManager").GetComponent<DungeonGenerator>();
         menMan = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
         //fail.text = "";
@@ -113,8 +118,18 @@ public class PartyManager : MonoBehaviour
 
         if (!GetComponent<PartyBase>().allDead)
         {
+
+            if (bugMan.usedMoney >= bugMan.maxMoney / 2)
+            {
+                menuMan.specialAbilityMenu.SetActive(false);
+                menuMan.scoreMenu.SetActive(true);
+            }
+            else
+            {
+                menuMan.specialAbilityMenu.SetActive(true);
+            }
             //menMan.ShowMenu(menMan.scoreMenu);
-            menMan.specialAbilityMenu.SetActive(true);
+            //menMan.specialAbilityMenu.SetActive(true);
             //fail.text = "Quest Failed";
             //yield return new WaitForSeconds(4.0f);
             //fail.text = "";

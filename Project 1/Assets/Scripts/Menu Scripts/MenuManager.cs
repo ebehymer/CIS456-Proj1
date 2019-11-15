@@ -15,13 +15,17 @@ public class MenuManager : MonoBehaviour
     private bool isInMainMenu;
     //private int buildIndex;
 
+    //private BudgetManager bugMan;
+
     // Start is called before the first frame update
     void Start()
     {
         // Makes sure the ability menu is off at start
         specialAbilityMenu.SetActive(false);
 
-        if(SceneManager.GetActiveScene().name == "Main Menu")
+       // bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
+
+        if (SceneManager.GetActiveScene().name == "Main Menu")
         {
             isInMainMenu = true;
             mainMenu.SetActive(true);
@@ -34,14 +38,14 @@ public class MenuManager : MonoBehaviour
         ShowMenu(menus[0]);
         pauseMenu.SetActive(false);
 
-       // buildIndex = SceneManager.GetActiveScene().buildIndex;
+        // buildIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     void Update()
     {
         Debug.Log("isInMainMenu is currently set to: " + isInMainMenu);
 
-        if(Input.GetKeyDown(KeyCode.Escape) && !isInMainMenu)
+        if (Input.GetKeyDown(KeyCode.Escape) && !isInMainMenu)
         {
             PauseGame();
         }
@@ -51,6 +55,7 @@ public class MenuManager : MonoBehaviour
             isInMainMenu = false;
             mainMenu.SetActive(false);
         }
+
     }
 
     public void PauseGame()
@@ -95,17 +100,17 @@ public class MenuManager : MonoBehaviour
 
     public void ShowMenu(Menu menuToShow)
     {
-        if(menus.Contains(menuToShow) == false)
+        if (menus.Contains(menuToShow) == false)
         {
             Debug.LogErrorFormat("{ 0} is not in the list of menus", menuToShow.name);
             return;
         }
 
-        foreach(Menu otherMenu in menus)
+        foreach (Menu otherMenu in menus)
         {
 
             // Is this the menu we want to display?
-            if(otherMenu == menuToShow)
+            if (otherMenu == menuToShow)
             {
                 // Mark it as active.
                 otherMenu.gameObject.SetActive(true);
@@ -116,7 +121,7 @@ public class MenuManager : MonoBehaviour
             else
             {
                 // Is the menu currently active?
-                if(otherMenu.gameObject.activeInHierarchy)
+                if (otherMenu.gameObject.activeInHierarchy)
                 {
                     // If so, tell the Menu object to invoke its "will disappear" action
                     otherMenu.menuWillDisappear.Invoke();

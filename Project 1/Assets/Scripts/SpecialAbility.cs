@@ -14,10 +14,12 @@ public class SpecialAbility : MonoBehaviour
     [SerializeField] private int abilityDamage = 20;
 
     private MenuManager menMan;
+    private BudgetManager bugMan;
 
     // Start is called before the first frame update
     void Start()
     {
+        bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
         menMan = GetComponent<MenuManager>();
         partyScript = GameObject.Find("Party").GetComponent<PartyBase>();
     }
@@ -25,7 +27,7 @@ public class SpecialAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator WaitToChange()

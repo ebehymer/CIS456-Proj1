@@ -30,7 +30,7 @@ public class SpecialAbility : MonoBehaviour
 
     IEnumerator WaitToChange()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         menMan.GoToScore();
     }
 

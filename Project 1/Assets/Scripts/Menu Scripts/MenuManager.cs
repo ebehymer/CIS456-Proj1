@@ -9,13 +9,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField] List<Menu> menus = new List<Menu>();
     public GameObject pauseMenu;
     public GameObject mainMenu;
-    public Menu scoreMenu;
+    public GameObject specialAbilityMenu;
+    public GameObject scoreMenu;
+    //public Menu scoreMenu;
     private bool isInMainMenu;
     //private int buildIndex;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Makes sure the ability menu is off at start
+        specialAbilityMenu.SetActive(false);
+
         if(SceneManager.GetActiveScene().name == "Main Menu")
         {
             isInMainMenu = true;
@@ -46,7 +51,6 @@ public class MenuManager : MonoBehaviour
             isInMainMenu = false;
             mainMenu.SetActive(false);
         }
-
     }
 
     public void PauseGame()
@@ -82,15 +86,12 @@ public class MenuManager : MonoBehaviour
         Debug.Log("You have quit the game.");
     }
 
-    //public void ReplayLevel()
-    //{
-    //    SceneManager.LoadScene(buildIndex);
-    //}
-
-    //public void NextLevel()
-    //{
-    //    SceneManager.LoadScene(buildIndex + 1);
-    //}
+    // This is the No buttons functionality. This could probably be more effective elsewhere
+    public void GoToScore()
+    {
+        specialAbilityMenu.SetActive(false);
+        scoreMenu.SetActive(true);
+    }
 
     public void ShowMenu(Menu menuToShow)
     {

@@ -113,7 +113,8 @@ public class PartyManager : MonoBehaviour
 
         if (!GetComponent<PartyBase>().allDead)
         {
-            menMan.ShowMenu(menMan.scoreMenu);
+            //menMan.ShowMenu(menMan.scoreMenu);
+            menMan.specialAbilityMenu.SetActive(true);
             //fail.text = "Quest Failed";
             yield return new WaitForSeconds(2.0f);
             //fail.text = "";

@@ -13,10 +13,13 @@ public class SpecialAbility : MonoBehaviour
     private PartyBase partyScript;
     [SerializeField] private int abilityDamage = 20;
 
+    private MenuManager menMan;
+
     // Start is called before the first frame update
     void Start()
     {
-        partyScript = gameObject.GetComponent<PartyBase>();
+        menMan = GetComponent<MenuManager>();
+        partyScript = GameObject.Find("Party").GetComponent<PartyBase>();
     }
 
     // Update is called once per frame
@@ -28,5 +31,6 @@ public class SpecialAbility : MonoBehaviour
     public void ActivateAbility()
     {
         partyScript.DealDamage(abilityDamage);
+        menMan.GoToScore();
     }
 }

@@ -9,5 +9,7 @@ public class LevelSelect : MonoBehaviour
     public void loadLevel(string lev)
     {
         SceneManager.LoadScene(lev);
+        GameManager.current = GameManager.GameState.placing;
     }
+    
 }

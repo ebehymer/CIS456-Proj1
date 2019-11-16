@@ -20,10 +20,5 @@ public class GameManager : MonoBehaviour
     {
         current = GameState.placing;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

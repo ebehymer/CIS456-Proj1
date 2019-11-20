@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
         // Makes sure the ability menu is off at start
         specialAbilityMenu.SetActive(false);
 
-       // bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
+       //    bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
 
         if (SceneManager.GetActiveScene().name == "Main Menu")
         {

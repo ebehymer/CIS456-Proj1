@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -57,6 +58,11 @@ public class TutorialManager : MonoBehaviour
                 canDecrease = false;
             }
         }
+    }
+
+    public void EndTutorial()
+    {
+        SceneManager.LoadScene("Level Select");
     }
 
     //IEnumerator BeginTutorial()

@@ -215,35 +215,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &186449553 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 731754772, guid: 7658920a295905240a02de64f3ffc59e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1286416152}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &186449554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186449553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2217298732e9719468fa9f7a57d7e450, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  budget: 0
-  spent: 0
-  membersAlive: 0
 --- !u!114 &186449558 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 731754774, guid: 7658920a295905240a02de64f3ffc59e,
     type: 3}
   m_PrefabInstance: {fileID: 1286416152}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186449553}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20e59f10aa5e72d4fbc8be8e3287e878, type: 3}
@@ -1073,30 +1051,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 731754772, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: menus.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: scoreMenu
-      value: 
-      objectReference: {fileID: 186449553}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: menus.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: specialAbilityMenu
-      value: 
-      objectReference: {fileID: 1933242302}
     - target: {fileID: 6475083220955615867, guid: 7658920a295905240a02de64f3ffc59e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1172,26 +1126,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 861608467}
-    - target: {fileID: 964305586, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1111670356, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 861608467}
-    - target: {fileID: 2127417208, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.10003662
-      objectReference: {fileID: 0}
-    - target: {fileID: 2127417208, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.099975586
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673867251, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
 --- !u!1 &1318818726
@@ -1455,12 +1393,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1933242302 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1673867250, guid: 7658920a295905240a02de64f3ffc59e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1286416152}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2093665219
 GameObject:
   m_ObjectHideFlags: 0

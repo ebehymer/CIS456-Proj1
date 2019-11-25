@@ -12,6 +12,7 @@ public class TutorialManager : MonoBehaviour
     //public GameObject partyPanel;
     //public GameObject finishedPanel;
     //public GameObject goodLuckaPanel;
+    public GameObject contents;
 
     public List<GameObject> tutorialPanels = new List<GameObject>();
     private int index;
@@ -29,17 +30,17 @@ public class TutorialManager : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {
+    { 
 
         if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && canIncrease)
         {
             index++;
             tutorialPanels[index].SetActive(true);
             tutorialPanels[index - 1].SetActive(false);
-            Debug.Log("index is: " + index);
+           // Debug.Log("index is: " + index);
             canDecrease = true;
 
-            if (index == 6)
+            if (index == 7)
             {
                 canIncrease = false;
             }
@@ -50,7 +51,7 @@ public class TutorialManager : MonoBehaviour
             index--;
             tutorialPanels[index].SetActive(true);
             tutorialPanels[index + 1].SetActive(false);
-            Debug.Log("index is: " + index);
+           // Debug.Log("index is: " + index);
             canIncrease = true;
 
             if (index == 0)
@@ -58,6 +59,16 @@ public class TutorialManager : MonoBehaviour
                 canDecrease = false;
             }
         }
+
+        if (index == 5)
+        {
+            contents.SetActive(false);
+        }
+        else
+        {
+            contents.SetActive(true);
+        }
+
     }
 
     public void EndTutorial()

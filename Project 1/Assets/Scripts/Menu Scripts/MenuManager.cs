@@ -55,7 +55,6 @@ public class MenuManager : MonoBehaviour
             isInMainMenu = false;
             mainMenu.SetActive(false);
         }
-
     }
 
     public void Replay()

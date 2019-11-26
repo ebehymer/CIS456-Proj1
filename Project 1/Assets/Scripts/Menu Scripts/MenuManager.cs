@@ -61,6 +61,7 @@ public class MenuManager : MonoBehaviour
     public void Replay()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.current = GameManager.GameState.placing;
     }
 
     public void Select()

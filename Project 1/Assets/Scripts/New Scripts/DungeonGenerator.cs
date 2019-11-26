@@ -150,7 +150,7 @@ public class DungeonGenerator : MonoBehaviour
         //flows from their position. 
         //This loop also fills in the positions between each waypoint to create
         //The connected path of the dungeon
-        for(int i = 0; i < wayPoints.Length; i++)
+        for(int i = 0; i < wayPoints.Length-1; i++)
         {
 
             if (horizontal)
@@ -158,49 +158,47 @@ public class DungeonGenerator : MonoBehaviour
                 if (wayPoints[i].y > wayPoints[i + 1].y)
                 {
 
-                    if (wayPointObj[i].GetComponent<Borders>() != null)
-                    {
-                        wayPointObj[i].GetComponent<Borders>().bottom.SetActive(false);
+                    //if (wayPointObj[i].GetComponent<Borders>() != null)
+                    //{
+                    //    wayPointObj[i].GetComponent<Borders>().bottom.SetActive(false);
                        
-                    }
-                    if (wayPointObj[i + 1].GetComponent<Borders>() != null)
-                    {
-                        wayPointObj[i + 1].GetComponent<Borders>().top.SetActive(false);
-                    }
+                    //}
+                    //if (wayPointObj[i + 1].GetComponent<Borders>() != null)
+                    //{
+                    //    wayPointObj[i + 1].GetComponent<Borders>().top.SetActive(false);
+                    //}
 
                     for (int k = (int)wayPoints[i].y - 1; k > wayPoints[i + 1].y; k--)
                     {
                         GameObject ins = Instantiate(floor, new Vector3(wayPoints[i].x, k, zPos), Quaternion.identity, holder.transform);
                         zPos -= .1f;
-                        ins.GetComponent<Borders>().top.SetActive(false);
-                        ins.GetComponent<Borders>().bottom.SetActive(false);
-
-                        ins.transform.localScale = new Vector3(.95f, 1, .95f);
+                        //ins.GetComponent<Borders>().top.SetActive(false);
+                        //ins.GetComponent<Borders>().bottom.SetActive(false);
+                        
                         path.Add(new Vector2(wayPoints[i].x, k));
                     }
                 }
                 else
                 {
-                    if (wayPoints[i].y != wayPoints[i + 1].y)
-                    {
-                        if (wayPointObj[i].GetComponent<Borders>() != null)
-                        {
-                            wayPointObj[i].GetComponent<Borders>().top.SetActive(false);
+                    //if (wayPoints[i].y != wayPoints[i + 1].y)
+                    //{
+                    //    if (wayPointObj[i].GetComponent<Borders>() != null)
+                    //    {
+                    //        wayPointObj[i].GetComponent<Borders>().top.SetActive(false);
 
-                        }
-                        if (wayPointObj[i + 1].GetComponent<Borders>() != null)
-                        {
-                            wayPointObj[i + 1].GetComponent<Borders>().bottom.SetActive(false);
-                        }
-                    }
+                    //    }
+                    //    if (wayPointObj[i + 1].GetComponent<Borders>() != null)
+                    //    {
+                    //        wayPointObj[i + 1].GetComponent<Borders>().bottom.SetActive(false);
+                    //    }
+                    //}
                     for (int k = (int)wayPoints[i].y + 1; k < wayPoints[i + 1].y; k++)
                     {
                         GameObject ins = Instantiate(floor, new Vector3(wayPoints[i].x, k, zPos), Quaternion.identity, holder.transform);
                         zPos -= .1f;
-                        ins.GetComponent<Borders>().top.SetActive(false);
-                        ins.GetComponent<Borders>().bottom.SetActive(false);
-
-                        ins.transform.localScale = new Vector3(.95f, 1, .95f);
+                        //ins.GetComponent<Borders>().top.SetActive(false);
+                        //ins.GetComponent<Borders>().bottom.SetActive(false);
+                        
                         path.Add(new Vector2(wayPoints[i].x, k));
                     }
                 }
@@ -213,54 +211,64 @@ public class DungeonGenerator : MonoBehaviour
                 if (wayPoints[i].x > wayPoints[i + 1].x)
                 {
 
-                    if (wayPointObj[i].GetComponent<Borders>() != null)
-                    {
-                        wayPointObj[i].GetComponent<Borders>().left.SetActive(false);
+                    //if (wayPointObj[i].GetComponent<Borders>() != null)
+                    //{
+                    //    wayPointObj[i].GetComponent<Borders>().left.SetActive(false);
                         
-                    }
-                    if (wayPointObj[i + 1].GetComponent<Borders>() != null)
-                    {
-                        wayPointObj[i + 1].GetComponent<Borders>().right.SetActive(false);
-                    }
+                    //}
+                    //if (wayPointObj[i + 1].GetComponent<Borders>() != null)
+                    //{
+                    //    wayPointObj[i + 1].GetComponent<Borders>().right.SetActive(false);
+                    //}
 
                     for (int k = (int)wayPoints[i].x - 1; k > wayPoints[i + 1].x; k--)
                     {
                         GameObject ins = Instantiate(floor, new Vector3(k, wayPoints[i].y, zPos), Quaternion.identity, holder.transform);
                         zPos -= .1f;
-                        ins.GetComponent<Borders>().left.SetActive(false);
-                        ins.GetComponent<Borders>().right.SetActive(false);
-
-                        ins.transform.localScale = new Vector3(1, .95f, .95f);
+                        //ins.GetComponent<Borders>().left.SetActive(false);
+                        //ins.GetComponent<Borders>().right.SetActive(false);
+                        
                         path.Add(new Vector2(k, wayPoints[i].y));
                     }
                 }
                 else
                 {
-                    if (wayPoints[i].x != wayPoints[i + 1].x)
-                    {
-                        if (wayPointObj[i].GetComponent<Borders>() != null)
-                        {
-                            wayPointObj[i].GetComponent<Borders>().right.SetActive(false);
+                    //if (wayPoints[i].x != wayPoints[i + 1].x)
+                    //{
+                    //    if (wayPointObj[i].GetComponent<Borders>() != null)
+                    //    {
+                    //        wayPointObj[i].GetComponent<Borders>().right.SetActive(false);
 
-                        }
-                        if (wayPointObj[i + 1].GetComponent<Borders>() != null)
-                        {
-                            wayPointObj[i + 1].GetComponent<Borders>().left.SetActive(false);
-                        }
-                    }
+                    //    }
+                    //    if (wayPointObj[i + 1].GetComponent<Borders>() != null)
+                    //    {
+                    //        wayPointObj[i + 1].GetComponent<Borders>().left.SetActive(false);
+                    //    }
+                    //}
                     for (int k = (int)wayPoints[i].x + 1; k < wayPoints[i + 1].x; k++)
                     {
                         GameObject ins = Instantiate(floor, new Vector3(k, wayPoints[i].y, zPos), Quaternion.identity, holder.transform);
                         zPos -= .1f;
-                        ins.transform.localScale = new Vector3(1, .95f, .95f);
-                        ins.GetComponent<Borders>().left.SetActive(false);
-                        ins.GetComponent<Borders>().right.SetActive(false);
+                        //ins.GetComponent<Borders>().left.SetActive(false);
+                        //ins.GetComponent<Borders>().right.SetActive(false);
 
 
                         path.Add(new Vector2(k, wayPoints[i].y));
                     }
                 }
                 horizontal = true;
+            }
+        }
+
+        GameObject[] floors = GameObject.FindGameObjectsWithTag("Path");
+
+        Debug.Log(floors.Length);
+
+        foreach(GameObject i in floors)
+        {
+            if(i.GetComponent<Borders>() != null)
+            {
+                i.GetComponent<Borders>().SetBorders();
             }
         }
     }

@@ -6,7 +6,7 @@ public class Borders : MonoBehaviour
 {
     public GameObject top, bottom, left, right, bottomLeft, bottomRight, topLeft, topRight, bottomLeft2, bottomRight2;
 
-    public Vector2 above, below, forward, back, belowBack, belowForward, aboveForward, aboveBack;
+    public Vector3 above, below, forward, back, belowBack, belowForward, aboveForward, aboveBack;
 
     public bool aboveHit, belowHit, forwardHit, backHit;
 
@@ -17,15 +17,15 @@ public class Borders : MonoBehaviour
     public void SetBorders()
     {
 
-        above = new Vector2(this.gameObject.transform.position.x , this.gameObject.transform.position.y+1);
-        below = new Vector2(this.gameObject.transform.position.x , this.gameObject.transform.position.y-1);
-        forward = new Vector2(this.gameObject.transform.position.x+1 , this.gameObject.transform.position.y);
-        back = new Vector2(this.gameObject.transform.position.x-1, this.gameObject.transform.position.y);
+        above = new Vector3(this.gameObject.transform.position.x , this.gameObject.transform.position.y+1, gameObject.transform.position.z);
+        below = new Vector3(this.gameObject.transform.position.x , this.gameObject.transform.position.y-1, gameObject.transform.position.z);
+        forward = new Vector3(this.gameObject.transform.position.x+1 , this.gameObject.transform.position.y, gameObject.transform.position.z);
+        back = new Vector3(this.gameObject.transform.position.x-1, this.gameObject.transform.position.y, gameObject.transform.position.z);
 
-        belowForward = new Vector2(forward.x, below.y);
-        belowBack = new Vector2(back.x, below.y);
-        aboveForward = new Vector2(forward.x, above.y);
-        aboveBack = new Vector2(back.x, above.y);
+        belowForward = new Vector3(forward.x, below.y, gameObject.transform.position.z);
+        belowBack = new Vector3(back.x, below.y, gameObject.transform.position.z);
+        aboveForward = new Vector3(forward.x, above.y, gameObject.transform.position.z);
+        aboveBack = new Vector3(back.x, above.y, gameObject.transform.position.z);
         
         if(Physics2D.Raycast(above, Vector3.zero, Mathf.Infinity, path))
         {

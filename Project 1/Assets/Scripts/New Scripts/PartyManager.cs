@@ -43,7 +43,7 @@ public class PartyManager : MonoBehaviour
 
         specialAbilityPrompt.gameObject.SetActive(false);
 
-        if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "Level 3")
+        if (SceneManager.GetActiveScene().name != "Level 3")
         {
             specialAbilityPrompt.gameObject.SetActive(false);
         }
@@ -183,7 +183,7 @@ public class PartyManager : MonoBehaviour
                 //    menuMan.scoreMenu.SetActive(true);
                 //}
 
-                if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "Level 3")
+                if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "E-Level-1")
                 {
                     // Make it so that the player cannot get the special ability until after level 3
                     menuMan.specialAbilityMenu.SetActive(false);

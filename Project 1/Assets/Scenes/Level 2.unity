@@ -1332,30 +1332,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 731754772, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: menus.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: scoreMenu
-      value: 
-      objectReference: {fileID: 1325974474}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: menus.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: specialAbilityMenu
-      value: 
-      objectReference: {fileID: 1325974480}
     - target: {fileID: 6475083220955615867, guid: 7658920a295905240a02de64f3ffc59e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1431,14 +1407,42 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1687540034}
-    - target: {fileID: 964305586, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1111670356, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1687540034}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: menus.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: scoreMenu
+      value: 
+      objectReference: {fileID: 1325974474}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: menus.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: specialAbilityMenu
+      value: 
+      objectReference: {fileID: 1325974480}
+    - target: {fileID: 1673867250, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 731754772, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1673867251, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2127417208, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.10003662
@@ -1447,11 +1451,7 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.099975586
       objectReference: {fileID: 0}
-    - target: {fileID: 1673867251, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673867250, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+    - target: {fileID: 964305586, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

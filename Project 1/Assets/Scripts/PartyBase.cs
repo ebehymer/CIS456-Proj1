@@ -84,7 +84,7 @@ public class PartyBase : MonoBehaviour
                 Debug.Log(member.GetCharacterType() + " Dead"); //temp holders untill we implement death
                 member.isAlive = false;
                 text.text += member.GetCharacterType() + ": Dead\n";
-                death.Play();
+              //  death.Play();
             }
             else
             {
@@ -104,13 +104,13 @@ public class PartyBase : MonoBehaviour
                 allDead = false;
                 break;
             }
-            //Play Wilheim Scream - currently when any player dies
-            if (allDeath != null && allDead == true)
-            {
-                allDeath.Play();
-            }
             allDead = true;
            
+        }
+        //Play Wilheim Scream - currently when any player dies
+        if (allDeath != null && allDead == true)
+        {
+            allDeath.Play();
         }
         Debug.Log(allDead);
     }
@@ -152,7 +152,7 @@ public class PartyBase : MonoBehaviour
             //Play Wilheim Scream - currently when any player dies
             if (death != null)
             {
-                death.Play();
+              //  death.Play();
             }
             allDead = true;
 

@@ -124,12 +124,13 @@ public class TileManager : MonoBehaviour
 
             if (!deleting)
             {
-                if (Input.GetMouseButton(0) && !placed.Contains(hit.collider.transform.position))
+                if (Input.GetMouseButton(0) && !placed.Contains(hit.collider.transform.position) && placing != null)
                 {
 
                     numActions++;
 
                     if (lastDeleted) lastDeleted = false;
+
 
                     if(placing == trap)
                     {
@@ -172,7 +173,8 @@ public class TileManager : MonoBehaviour
                     GameObject holder = tile.collider.gameObject;
                     placed.Remove(hit.collider.transform.position);
                     undone.Push(holder);
-                    holder.GetComponent<SpriteRenderer>().enabled = false;
+                    holder.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                    holder.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
                     holder.GetComponent<BoxCollider2D>().enabled = false;
                     lastDeleted = true;
                     actions.TrimExcess();
@@ -211,8 +213,10 @@ public class TileManager : MonoBehaviour
         {
             GameObject redone = undone.Pop();
             actions.Push(redone);
-            redone.GetComponent<SpriteRenderer>().enabled = true;
+            redone.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+            redone.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
             redone.GetComponent<BoxCollider2D>().enabled = true;
+            placed.Add(redone.transform.position);
             numActions++;
             undoneCount--;
             numDeleted++;
@@ -234,7 +238,10 @@ public class TileManager : MonoBehaviour
         {
             GameObject holder = actions.Pop();
             undone.Push(holder);
-            holder.GetComponent<SpriteRenderer>().enabled = false;
+            holder.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+            holder.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
+            holder.GetComponent<BoxCollider2D>().enabled = false;
+            placed.Remove(holder.transform.position);
             undoneCount++;
             numActions--;
             RedoSound.Play();
@@ -261,8 +268,10 @@ public class TileManager : MonoBehaviour
             {
                 GameObject holder = actions.Pop();
                 undone.Push(holder);
-                holder.GetComponent<SpriteRenderer>().enabled = false;
+                holder.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                holder.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
                 holder.GetComponent<BoxCollider2D>().enabled = false;
+                placed.Remove(holder.transform.position);
                 undoneCount++;
                 numActions--;
                 numDeleted--;
@@ -285,7 +294,10 @@ public class TileManager : MonoBehaviour
         {
             GameObject holder = undone.Pop();
             actions.Push(holder);
-            holder.GetComponent<SpriteRenderer>().enabled = true;
+            holder.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+            holder.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+            holder.GetComponent<BoxCollider2D>().enabled = true;
+            placed.Add(holder.transform.position);
             undoneCount--;
             numActions++;
             RedoSound.Play();

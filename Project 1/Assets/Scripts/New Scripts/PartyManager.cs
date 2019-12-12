@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 //Script: PartyManager
 //Assignment: Project
 //Description: Guides the party along the dungeon path
-//Edits made by: Robyn, Emma
-//Last edited by and date: Nicole 11/14
+//Edits made by: Robyn, Emma, and CJ
+//Last edited by and date: CJ 11/25
 
 public class PartyManager : MonoBehaviour
 {
@@ -28,14 +29,50 @@ public class PartyManager : MonoBehaviour
     private BudgetManager bugMan;
     private MenuManager menuMan;
 
+    private TextMeshProUGUI specialAbilityPrompt;
+
     // Start is called before the first frame update
     void Start()
     {
+        specialAbilityPrompt = GameObject.Find("Special Ability Prompt Text").GetComponent<TextMeshProUGUI>();
         menuMan = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
         bugMan = GameObject.Find("Budget Manager").GetComponent<BudgetManager>();
         man = GameObject.Find("DungeonManager").GetComponent<DungeonGenerator>();
         menMan = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
         //fail.text = "";
+
+        specialAbilityPrompt.gameObject.SetActive(false);
+
+        if (SceneManager.GetActiveScene().name != "Level 3")
+        {
+            specialAbilityPrompt.gameObject.SetActive(false);
+        }
+        else
+        {
+            //specialAbilityPrompt.gameObject.SetActive(true);
+            StartCoroutine(FlashText());
+        }
+    }
+
+    // Could just make a method that uses invoke repeating but oh well.
+    public IEnumerator FlashText()
+    {
+        specialAbilityPrompt.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        specialAbilityPrompt.gameObject.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        specialAbilityPrompt.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        specialAbilityPrompt.gameObject.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        specialAbilityPrompt.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        specialAbilityPrompt.gameObject.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        specialAbilityPrompt.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        specialAbilityPrompt.gameObject.SetActive(false);
+
     }
 
     private void Update()
@@ -65,9 +102,9 @@ public class PartyManager : MonoBehaviour
         if (GetComponent<PartyBase>().allDead)
         {
             StopCoroutine(partyMove);
-            if(menuMan.scoreMenu.activeSelf == false)
+            if (menuMan.scoreMenu.activeSelf == false)
             {
-                
+
                 menuMan.scoreMenu.SetActive(true);
             }
         }
@@ -79,13 +116,13 @@ public class PartyManager : MonoBehaviour
     {
         GameManager.current = GameManager.GameState.running;
         transform.position = man.wayPoints[0];
-        for(int i = 0; i < man.numWayPoints-1; i++)
+        for (int i = 0; i < man.numWayPoints - 1; i++)
         {
             if (moveHoriz)
             {
-                if(man.wayPoints[i].x > man.wayPoints[i + 1].x)
+                if (man.wayPoints[i].x > man.wayPoints[i + 1].x)
                 {
-                    for(float k = man.wayPoints[i].x-1; k >= man.wayPoints[i+1].x; k--)
+                    for (float k = man.wayPoints[i].x - 1; k >= man.wayPoints[i + 1].x; k--)
                     {
                         transform.position = new Vector3(k, transform.position.y);
                         yield return new WaitForSeconds(waitTime);
@@ -93,18 +130,18 @@ public class PartyManager : MonoBehaviour
                 }
                 else
                 {
-                    for (float k = man.wayPoints[i].x+1; k <= man.wayPoints[i + 1].x; k++)
+                    for (float k = man.wayPoints[i].x + 1; k <= man.wayPoints[i + 1].x; k++)
                     {
                         transform.position = new Vector3(k, transform.position.y);
                         yield return new WaitForSeconds(waitTime);
                     }
                 }
-            }   
+            }
             else
             {
                 if (man.wayPoints[i].y > man.wayPoints[i + 1].y)
                 {
-                    for (float k = man.wayPoints[i].y-1; k >= man.wayPoints[i + 1].y; k--)
+                    for (float k = man.wayPoints[i].y - 1; k >= man.wayPoints[i + 1].y; k--)
                     {
                         transform.position = new Vector3(transform.position.x, k);
                         yield return new WaitForSeconds(waitTime);
@@ -112,7 +149,7 @@ public class PartyManager : MonoBehaviour
                 }
                 else
                 {
-                    for (float k = man.wayPoints[i].y+1; k <= man.wayPoints[i + 1].y; k++)
+                    for (float k = man.wayPoints[i].y + 1; k <= man.wayPoints[i + 1].y; k++)
                     {
                         transform.position = new Vector3(transform.position.x, k);
                         yield return new WaitForSeconds(waitTime);
@@ -128,23 +165,39 @@ public class PartyManager : MonoBehaviour
 
             if (bugMan.usedMoney >= bugMan.maxMoney / 2)
             {
-                    menuMan.specialAbilityMenu.SetActive(false);
-                    menuMan.scoreMenu.SetActive(true);
+                menuMan.specialAbilityMenu.SetActive(false);
+                menuMan.scoreMenu.SetActive(true);
                 Debug.Log("Special");
             }
             else
             {
 
-                if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 1") && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 2"))
+                //if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 1") && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Level 2"))
+                //{
+                //    menuMan.specialAbilityMenu.SetActive(true);
+                //    Debug.Log("Special");
+                //}
+                //else
+                //{
+                //    menuMan.specialAbilityMenu.SetActive(false);
+                //    menuMan.scoreMenu.SetActive(true);
+                //}
+
+                if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "E-Level-1")
                 {
-                    menuMan.specialAbilityMenu.SetActive(true);
-                    Debug.Log("Special");
+                    // Make it so that the player cannot get the special ability until after level 3
+                    menuMan.specialAbilityMenu.SetActive(false);
+                    menuMan.scoreMenu.SetActive(true);
+                    //menuMan.specialAbilityPrompt.gameObject.setActive(false);
                 }
                 else
                 {
-                    menuMan.specialAbilityMenu.SetActive(false);
-                    menuMan.scoreMenu.SetActive(true);
+                    specialAbilityPrompt.gameObject.SetActive(true);
+                    menuMan.specialAbilityMenu.SetActive(true);
+                    // menuMan.scoreMenu.SetActive(false);
                 }
+
+
             }
             //menMan.ShowMenu(menMan.scoreMenu);
             //menMan.specialAbilityMenu.SetActive(true);
@@ -161,8 +214,8 @@ public class PartyManager : MonoBehaviour
         if (GameManager.current == GameManager.GameState.placing)
         {
             moveHoriz = true;
-            if (FinishedSound != null) 
-            FinishedSound.Play();
+            if (FinishedSound != null)
+                FinishedSound.Play();
             partyMove = StartCoroutine(Walk());
         }
     }
@@ -170,7 +223,7 @@ public class PartyManager : MonoBehaviour
 
     public void Restart()
     {
-        foreach(GameObject i in stepped)
+        foreach (GameObject i in stepped)
         {
             i.GetComponent<BoxCollider2D>().enabled = true;
             i.GetComponent<SpriteRenderer>().enabled = true;
@@ -188,7 +241,7 @@ public class PartyManager : MonoBehaviour
         GetComponent<PartyBase>().updateText();
     }
 
-    
+
 
     public void timeChange(Text t)
     {

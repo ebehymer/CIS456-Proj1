@@ -973,14 +973,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 1289068105, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_FontData.m_VerticalOverflow
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1289068105, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_FontData.m_BestFit
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6475083220955615867, guid: 7658920a295905240a02de64f3ffc59e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1071,6 +1063,14 @@ PrefabInstance:
     - target: {fileID: 731754772, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289068105, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289068105, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 731754773, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1383,7 +1383,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 86590700ff910234db46110901b8873a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.118
   m_Pitch: 1
   Loop: 0
   Mute: 0

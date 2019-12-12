@@ -1574,30 +1574,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 731754772, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: menus.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: scoreMenu
-      value: 
-      objectReference: {fileID: 186449553}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: menus.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
-        type: 3}
-      propertyPath: specialAbilityMenu
-      value: 
-      objectReference: {fileID: 1933242302}
     - target: {fileID: 6475083220955615867, guid: 7658920a295905240a02de64f3ffc59e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1673,14 +1649,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 861608467}
-    - target: {fileID: 964305586, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1111670356, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 861608467}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: menus.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: scoreMenu
+      value: 
+      objectReference: {fileID: 186449553}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: menus.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475083220955615866, guid: 7658920a295905240a02de64f3ffc59e,
+        type: 3}
+      propertyPath: specialAbilityMenu
+      value: 
+      objectReference: {fileID: 1933242302}
+    - target: {fileID: 731754772, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1673867251, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2127417208, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.10003662
@@ -1689,9 +1689,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.099975586
       objectReference: {fileID: 0}
-    - target: {fileID: 1673867251, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
+    - target: {fileID: 964305586, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7658920a295905240a02de64f3ffc59e, type: 3}
@@ -1877,7 +1877,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 86590700ff910234db46110901b8873a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.118
   m_Pitch: 1
   Loop: 0
   Mute: 0
